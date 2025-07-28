@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Strabisme et ses Traitements - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        body.lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+   <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+            <div class="hidden md:flex items-center gap-8" id="nav-links">
+                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+            <div id="header-buttons-container" class="flex items-center gap-4">
+                <div class="lang-switcher flex gap-2">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+             <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+             <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+             <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+             <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold" data-fr="Nos Services" data-ar="خدماتنا">Nos Services</p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2" data-fr="Le Strabisme et ses Traitements" data-ar="الحول وعلاجاته">Le Strabisme et ses Traitements</h1>
+            </div>
+        </section>
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="Comprendre le Strabisme" data-ar="فهم الحول">Comprendre le Strabisme</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-fr="Le strabisme est un trouble de l’alignement des yeux dans lequel les axes visuels ne sont pas parallèles. Un œil peut dévier vers l’intérieur (ésotropie), l’extérieur (exotropie), le haut (hypertropie) ou le bas (hypotropie). Ce désalignement peut être constant ou intermittent." data-ar="الحول هو اضطراب في محاذاة العينين حيث لا تكون المحاور البصرية متوازية. يمكن أن تنحرف إحدى العينين إلى الداخل (الحول الإنسي)، أو إلى الخارج (الحول الوحشي)، أو إلى الأعلى (الحول الفوقاني)، أو إلى الأسفل (الحول التحتاني). يمكن أن يكون هذا الانحراف ثابتًا أو متقطعًا.">Le strabisme est un trouble de l’alignement des yeux dans lequel les axes visuels ne sont pas parallèles. Un œil peut dévier vers l’intérieur (ésotropie), l’extérieur (exotropie), le haut (hypertropie) ou le bas (hypotropie). Ce désalignement peut être constant ou intermittent.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-fr="Causes (Étiologies)" data-ar="الأسباب (المسببات)">Causes (Étiologies)</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Le strabisme peut être congénital ou acquis. Il peut résulter d’un déséquilibre des muscles oculomoteurs, d’une anomalie neurologique, d’une hypermétropie importante, ou être secondaire à un traumatisme ou une pathologie." data-ar="يمكن أن يكون الحول خلقيًا أو مكتسبًا. قد ينجم عن خلل في توازن عضلات العين، أو شذوذ عصبي، أو مد بصر شديد، أو قد يكون ثانويًا لصدمة أو مرض.">Le strabisme peut être congénital ou acquis. Il peut résulter d’un déséquilibre des muscles oculomoteurs, d’une anomalie neurologique, d’une hypermétropie importante, ou être secondaire à un traumatisme ou une pathologie.</p>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="Approches de Traitement" data-ar="مناهج العلاج">Approches de Traitement</h2>
+                        <p class="text-gray-600 mb-6" data-fr="Le traitement vise à améliorer l’alignement, restaurer la vision binoculaire et prévenir l’amblyopie ('œil paresseux')." data-ar="يهدف العلاج إلى تحسين المحاذاة، واستعادة الرؤية بكلتا العينين، ومنع الغمش ('العين الكسولة').">Le traitement vise à améliorer l’alignement, restaurer la vision binoculaire et prévenir l’amblyopie ("œil paresseux").</p>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Options Thérapeutiques" data-ar="الخيارات العلاجية">Options Thérapeutiques</h3>
+                        <div class="space-y-4">
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Traitement Médical" data-ar="العلاج الطبي">Traitement Médical</h4>
+                                <p class="text-gray-600" data-fr="Correction de l’amblyopie (cache oculaire), exercices orthoptiques, ou injections de toxine botulique." data-ar="تصحيح الغمش (غطاء العين)، تمارين تقويم البصر، أو حقن توكسين البوتولينوم.">Correction de l’amblyopie (cache oculaire), exercices orthoptiques, ou injections de toxine botulique.</p>
+                           </div>
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Traitement Optique" data-ar="العلاج البصري">Traitement Optique</h4>
+                                <p class="text-gray-600" data-fr="Prescription de lunettes (notamment en cas d'hypermétropie) ou utilisation de verres prismatiques pour réduire la vision double." data-ar="وصف النظارات (خاصة في حالة مد البصر) أو استخدام العدسات المنشورية لتقليل الرؤية المزدوجة.">Prescription de lunettes (notamment en cas d'hypermétropie) ou utilisation de verres prismatiques pour réduire la vision double.</p>
+                           </div>
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Traitement Chirurgical" data-ar="العلاج الجراحي">Traitement Chirurgical</h4>
+                                <p class="text-gray-600" data-fr="La chirurgie est indiquée lorsque le strabisme est important ou persistant. Elle est réalisée pour réaligner les yeux et un réalignement complet peut nécessiter plusieurs interventions." data-ar="يُستطب الجراحة عندما يكون الحول كبيرًا أو مستمرًا. يتم إجراؤها لإعادة محاذاة العينين وقد يتطلب التصحيح الكامل عدة عمليات.">La chirurgie est indiquée lorsque le strabisme est important ou persistant. Elle est réalisée pour réaligner les yeux et un réalignement complet peut nécessiter plusieurs interventions.</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Pour une vision harmonieuse." data-ar="من أجل رؤية متناغمة.">Pour une vision harmonieuse.</h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="Le strabisme peut être corrigé à tout âge. Explorez les options de traitement pour améliorer l'alignement et la fonction visuelle." data-ar="يمكن تصحيح الحول في أي عمر. استكشف خيارات العلاج لتحسين المحاذاة والوظيفة البصرية.">Le strabisme peut être corrigé à tout âge. Explorez les options de traitement pour améliorer l'alignement et la fonction visuelle.</p>
+                <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Prendre rendez-vous" data-ar="حجز موعد">Prendre rendez-vous</a>
+             </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            const handleHeaderStyle = () => {
+                header.classList.add('header-scrolled');
+                document.getElementById('nav-links')?.classList.add('text-gray-700');
+                document.querySelector('#mobile-menu-button i')?.classList.add('text-gray-700');
+            };
+            
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(el => {
+                    const translation = el.getAttribute(`data-${lang}`);
+                    if (translation) el.innerHTML = translation;
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+
+            handleHeaderStyle();
+        });
+    </script>
+</body>
+</html>

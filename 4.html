@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirurgie de la Cataracte - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Arabic Font specific */
+        body.lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        /* Header Styling */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+
+        /* Language Switcher Button */
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+   <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8" id="nav-links">
+                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div id="header-buttons-container" class="flex items-center gap-4">
+                <div class="lang-switcher flex gap-2">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+             <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+             <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+             <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+             <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold" data-fr="Nos Services" data-ar="خدماتنا">Nos Services</p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2" data-fr="Chirurgie de la Cataracte" data-ar="جراحة الساد">Chirurgie de la Cataracte</h1>
+            </div>
+        </section>
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="Évaluation et Bilan pré-opératoire" data-ar="التقييم والفحص قبل الجراحة">Évaluation et Bilan pré-opératoire</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-fr="Ces examens (imagerie) permettent de confirmer la présence d'une cataracte, d'évaluer son degré, et de déterminer la possibilité d'une intervention chirurgicale ainsi que le type de procédure nécessaire." data-ar="تساعد هذه الفحوصات (التصوير) في تأكيد وجود الساد، وتقييم درجته، وتحديد إمكانية إجراء عملية جراحية ونوع الإجراء المطلوب.">Ces examens (imagerie) permettent de confirmer la présence d'une cataracte, d'évaluer son degré, et de déterminer la possibilité d'une intervention chirurgicale ainsi que le type de procédure nécessaire.</p>
+                        <p class="text-gray-600 mb-6" data-fr="La chirurgie de la cataracte vise à retirer le cristallin naturel opacifié et à le remplacer par une lentille intraoculaire artificielle adaptée à l'état du patient. Le type d'intervention, la technique utilisée et le type de lentille varient d'un patient à l'autre. La faisabilité de l'opération et sa nature seront définies après la réalisation des examens de la cataracte." data-ar="تهدف جراحة الساد إلى إزالة العدسة الطبيعية المعتمة واستبدالها بعدسة صناعية داخل العين تتناسب مع حالة المريض. يختلف نوع التدخل والتقنية المستخدمة ونوع العدسة من مريض لآخر. سيتم تحديد جدوى العملية وطبيعتها بعد إجراء فحوصات الساد.">La chirurgie de la cataracte vise à retirer le cristallin naturel opacifié et à le remplacer par une lentille intraoculaire artificielle adaptée à l'état du patient. Le type d'intervention, la technique utilisée et le type de lentille varient d'un patient à l'autre. La faisabilité de l'opération et sa nature seront définies après la réalisation des examens de la cataracte.</p>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg mb-8">
+                            <h4 class="font-bold text-xl text-gray-800 mb-3" data-fr="Considérations médicales importantes" data-ar="اعتبارات طبية هامة">Considérations médicales importantes</h4>
+                            <p class="text-gray-700 mb-4" data-fr="Si vous êtes diabétique, veuillez sélectionner le service dédié aux examens de la rétinopathie diabétique et apporter un rapport médical détaillé de votre diabétologue." data-ar="إذا كنت مصابًا بالسكري، يرجى اختيار الخدمة المخصصة لفحوصات اعتلال الشبكية السكري وإحضار تقرير طبي مفصل من طبيب السكري الخاص بك.">Si vous êtes diabétique, veuillez sélectionner le service dédié aux examens de la rétinopathie diabétique et apporter un rapport médical détaillé de votre diabétologue.</p>
+                            <p class="text-gray-700 mb-4" data-fr="En cas d'hypertension oculaire, veuillez choisir le service d'examen et d'imagerie de la pression intraoculaire." data-ar="في حالة ارتفاع ضغط العين، يرجى اختيار خدمة فحص وتصوير ضغط العين.">En cas d'hypertension oculaire, veuillez choisir le service d'examen et d'imagerie de la pression intraoculaire.</p>
+                             <p class="text-gray-700" data-fr="Si la cataracte est accompagnée d'autres pathologies (diabète, hypertension oculaire, myopie), des examens complémentaires sont nécessaires pour évaluer l'ensemble des conditions. Dans ce cas, nous vous recommandons de choisir le service correspondant à votre état de santé." data-ar="إذا كان الساد مصحوبًا بأمراض أخرى (السكري، ارتفاع ضغط العين، قصر النظر)، فإن فحوصات إضافية ضرورية لتقييم جميع الحالات. في هذه الحالة، نوصيك باختيار الخدمة المناسبة لحالتك الصحية.">Si la cataracte est accompagnée d'autres pathologies (diabète, hypertension oculaire, myopie), des examens complémentaires sont nécessaires pour évaluer l'ensemble des conditions. Dans ce cas, nous vous recommandons de choisir le service correspondant à votre état de santé.</p>
+                            <p class="font-bold text-gray-700" data-fr="Dès votre arrivée, veuillez informer l'équipe médicale de vos antécédents (diabète, hypertension, prise de certains médicaments)." data-ar="عند وصولك، يرجى إبلاغ الفريق الطبي بتاريخك الصحي (السكري، ارتفاع ضغط الدم، تناول بعض الأدوية).">Dès votre arrivée, veuillez informer l'équipe médicale de vos antécédents (diabète, hypertension, prise de certains médicaments).</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Vision : Avant et Après" data-ar="الرؤية: قبل وبعد">Vision : Avant et Après</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=Vision+avec+Cataracte" alt="Vision avec Cataracte" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-gray-500" data-fr="Avant" data-ar="قبل">Avant</p></div>
+                            <div><img src="https://placehold.co/400x300/a5b4fc/ffffff?text=Vision+Retrouvée" alt="Vision après chirurgie" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-blue-600" data-fr="Après" data-ar="بعد">Après</p></div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 italic" data-fr="Les images sont des illustrations. Les résultats réels peuvent varier en fonction du patient." data-ar="الصور للتوضيح فقط. قد تختلف النتائج الفعلية حسب المريض.">Les images sont des illustrations. Les résultats réels peuvent varier en fonction du patient.</p>
+                        <div class="mt-8 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                           <h4 class="font-bold text-xl text-gray-800 mb-3" data-fr="Préparation à l'examen" data-ar="التحضير للفحص">Préparation à l'examen</h4>
+                            <p class="text-gray-700 mb-4" data-fr="Si vous avez des examens antérieurs, veuillez les apporter. L'heure de votre rendez-vous correspond à l'heure d'arrivée. L'examen peut nécessiter plusieurs heures sur place." data-ar="إذا كانت لديك فحوصات سابقة، يرجى إحضارها. وقت موعدك هو وقت الوصول. قد يتطلب الفحص عدة ساعات في العيادة.">Si vous avez des examens antérieurs, veuillez les apporter. L'heure de votre rendez-vous correspond à l'heure d'arrivée. L'examen peut nécessiter plusieurs heures sur place.</p>
+                            <p class="text-gray-700" data-fr="Les patients sont traités selon leur tour et le type d'examen prévu. L'ordre de passage est donc spécifique à chaque service. Nous vous fournissons ces recommandations afin que vous puissiez planifier votre journée." data-ar="يتم التعامل مع المرضى حسب دورهم ونوع الفحص المقرر. لذا، فإن ترتيب الدخول خاص بكل قسم. نقدم لكم هذه التوصيات حتى تتمكنوا من تخطيط يومكم.">Les patients sont traités selon leur tour et le type d'examen prévu. L'ordre de passage est donc spécifique à chaque service. Nous vous fournissons ces recommandations afin que vous puissiez planifier votre journée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Retrouvez la clarté du monde qui vous entoure." data-ar="استعد وضوح العالم من حولك.">Retrouvez la clarté du monde qui vous entoure.</h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="La cataracte n'est pas une fatalité. Prenez rendez-vous pour un bilan complet et découvrez comment retrouver une vision nette." data-ar="الساد ليس قدرًا محتومًا. احجز موعدًا لإجراء تقييم كامل واكتشف كيف تستعيد رؤيتك الواضحة.">La cataracte n'est pas une fatalité. Prenez rendez-vous pour un bilan complet et découvrez comment retrouver une vision nette.</p>
+                <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Faire le bilan" data-ar="إجراء التقييم">Faire le bilan</a>
+             </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
+            
+            const handleHeaderStyle = () => {
+                header.classList.add('header-scrolled');
+                if (navLinks) {
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-gray-700');
+                }
+                if (mobileMenuButtonIcon) {
+                    mobileMenuButtonIcon.classList.add('text-gray-700');
+                }
+            };
+            
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                if (lang === 'ar') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
+                }
+
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation) {
+                       element.innerHTML = translation;
+                    }
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+
+            handleHeaderStyle();
+        });
+    </script>
+</body>
+</html>

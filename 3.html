@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prise en Charge du Glaucome - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Arabic Font specific */
+        body.lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        /* Header Styling */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+
+        /* Language Switcher Button */
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+   <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8" id="nav-links">
+                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div id="header-buttons-container" class="flex items-center gap-4">
+                <div class="lang-switcher flex gap-2">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+             <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+             <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+             <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+             <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold" data-fr="Nos Services" data-ar="خدماتنا">Nos Services</p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2" data-fr="Prise en Charge du Glaucome" data-ar="التكفل بالجلوكوما">Prise en Charge du Glaucome</h1>
+            </div>
+        </section>
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="Comprendre le Glaucome" data-ar="فهم الجلوكوما">Comprendre le Glaucome</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-fr="Le glaucome est une neuropathie optique progressive caractérisée par une détérioration du nerf optique, souvent associée à une pression intraoculaire (PIO) élevée. C'est l'une des principales causes de perte de vision irréversible dans le monde." data-ar="الجلوكوما هو اعتلال عصبي بصري متقدم يتميز بتلف العصب البصري، وغالبًا ما يكون مصحوبًا بارتفاع ضغط العين (PIO). وهو أحد الأسباب الرئيسية لفقدان البصر الدائم في العالم.">Le glaucome est une neuropathie optique progressive caractérisée par une détérioration du nerf optique, souvent associée à une pression intraoculaire (PIO) élevée. C'est l'une des principales causes de perte de vision irréversible dans le monde.</p>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4" data-fr="Origine et Facteurs de Risque" data-ar="الأصل وعوامل الخطر">Origine et Facteurs de Risque</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Le glaucome peut être primaire (sans cause apparente) ou secondaire (lié à une autre pathologie). Ses principaux facteurs de risque incluent :" data-ar="يمكن أن يكون الجلوكوما أوليًا (بدون سبب واضح) أو ثانويًا (مرتبطًا بمرض آخر). وتشمل عوامل الخطر الرئيسية ما يلي:">Le glaucome peut être primaire (sans cause apparente) ou secondaire (lié à une autre pathologie). Ses principaux facteurs de risque incluent :</p>
+                        <ul class="space-y-3 text-gray-700 mb-8">
+                            <li class="flex items-start"><i class="fas fa-exclamation-triangle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Pression intraoculaire (PIO) élevée" data-ar="ارتفاع ضغط العين (PIO)">Pression intraoculaire (PIO) élevée</span></li>
+                            <li class="flex items-start"><i class="fas fa-exclamation-triangle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Âge avancé" data-ar="التقدم في السن">Âge avancé</span></li>
+                            <li class="flex items-start"><i class="fas fa-exclamation-triangle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Antécédents familiaux de glaucome" data-ar="تاريخ عائلي للإصابة بالجلوكوما">Antécédents familiaux de glaucome</span></li>
+                            <li class="flex items-start"><i class="fas fa-exclamation-triangle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Maladies vasculaires (hypertension, diabète)" data-ar="أمراض الأوعية الدموية (ارتفاع ضغط الدم، السكري)">Maladies vasculaires (hypertension, diabète)</span></li>
+                            <li class="flex items-start"><i class="fas fa-exclamation-triangle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Forte myopie" data-ar="قصر النظر الشديد">Forte myopie</span></li>
+                        </ul>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4" data-fr="Diagnostic et Examens" data-ar="التشخيص والفحوصات">Diagnostic et Examens</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Le diagnostic du glaucome repose sur plusieurs examens spécialisés : mesure de la pression intraoculaire (tonométrie), examen du nerf optique (ophtalmoscopie), test du champ visuel (périmétrie) et tomographie par cohérence optique (OCT) pour analyser l'épaisseur des fibres nerveuses rétiniennes." data-ar="يعتمد تشخيص الجلوكوما على عدة فحوصات متخصصة: قياس ضغط العين (tonometry)، فحص العصب البصري (ophthalmoscopy)، اختبار مجال الرؤية (perimetry)، والتصوير المقطعي بالتماسك البصري (OCT) لتحليل سمك ألياف العصب الشبكي.">Le diagnostic du glaucome repose sur plusieurs examens spécialisés : mesure de la pression intraoculaire (tonométrie), examen du nerf optique (ophtalmoscopie), test du champ visuel (périmétrie) et tomographie par cohérence optique (OCT) pour analyser l'épaisseur des fibres nerveuses rétiniennes.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Traitement et Prise en Charge" data-ar="العلاج والتكفل">Traitement et Prise en Charge</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Le but du traitement est de ralentir la progression du glaucome, en particulier en contrôlant la pression intraoculaire, par :" data-ar="الهدف من العلاج هو إبطاء تقدم الجلوكوما، خاصة عن طريق التحكم في ضغط العين، من خلال:">Le but du traitement est de ralentir la progression du glaucome, en particulier en contrôlant la pression intraoculaire, par :</p>
+                        <div class="space-y-4">
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Collyres Hypotensifs" data-ar="قطرات العين الخافضة للضغط">Collyres Hypotensifs</h4>
+                                <p class="text-gray-600" data-fr="Bêta-bloquants, analogues de prostaglandines, inhibiteurs de l'anhydrase carbonique, alpha-agonistes." data-ar="حاصرات بيتا، نظائر البروستاجلاندين، مثبطات الأنهيدراز الكربوني، منبهات ألفا.">Bêta-bloquants, analogues de prostaglandines, inhibiteurs de l'anhydrase carbonique, alpha-agonistes.</p>
+                           </div>
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Traitement Laser" data-ar="العلاج بالليزر">Traitement Laser</h4>
+                                <p class="text-gray-600" data-fr="Trabéculoplastie ou iridotomie au laser, si les collyres s'avèrent insuffisants." data-ar="رأب التربيق أو بضع القزحية بالليزر، إذا كانت القطرات غير كافية.">Trabéculoplastie ou iridotomie au laser, si les collyres s'avèrent insuffisants.</p>
+                           </div>
+                           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-lg text-gray-800" data-fr="Chirurgie" data-ar="الجراحة">Chirurgie</h4>
+                                <p class="text-gray-600" data-fr="Trabéculectomie ou insertion de valves de drainage pour les cas avancés ou résistants aux autres traitements." data-ar="استئصال التربيق أو زرع صمامات تصريف للحالات المتقدمة أو المقاومة للعلاجات الأخرى.">Trabéculectomie ou insertion de valves de drainage pour les cas avancés ou résistants aux autres traitements.</p>
+                           </div>
+                        </div>
+                         <div class="mt-8">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Imagerie du Nerf Optique" data-ar="تصوير العصب البصري">Imagerie du Nerf Optique</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=Nerf+Optique+Sain" alt="Nerf Optique Sain" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-gray-500" data-fr="Sain" data-ar="سليم">Sain</p></div>
+                                <div><img src="https://placehold.co/400x300/f87171/ffffff?text=Atteinte+Glaucomateuse" alt="Atteinte Glaucomateuse" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-red-600" data-fr="Atteinte" data-ar="مصاب">Atteinte</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Ne laissez pas le glaucome dans l'ombre." data-ar="لا تدع الجلوكوما في الظل.">Ne laissez pas le glaucome dans l'ombre.</h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="Un dépistage précoce est la clé pour préserver votre vision. Prenez rendez-vous pour un contrôle complet." data-ar="الكشف المبكر هو مفتاح الحفاظ على بصرك. احجز موعدًا لإجراء فحص شامل.">Un dépistage précoce est la clé pour préserver votre vision. Prenez rendez-vous pour un contrôle complet.</p>
+                <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Demander un dépistage" data-ar="طلب فحص">Demander un dépistage</a>
+             </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
+            
+            const handleHeaderStyle = () => {
+                header.classList.add('header-scrolled');
+                if (navLinks) {
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-gray-700');
+                }
+                if (mobileMenuButtonIcon) {
+                    mobileMenuButtonIcon.classList.add('text-gray-700');
+                }
+            };
+            
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                if (lang === 'ar') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
+                }
+
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation) {
+                       element.innerHTML = translation;
+                    }
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+
+            handleHeaderStyle();
+        });
+    </script>
+</body>
+</html>

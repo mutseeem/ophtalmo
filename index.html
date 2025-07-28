@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Saada - Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Arabic Font specific */
+        body.lang-ar {
+            font-family: 'Cairo', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3 {
+            font-family: 'Cairo', sans-serif; /* Use Cairo for headings in Arabic as well */
+        }
+        /* Hero Section with background image from src/3.jpg */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 20, 40, 0.6), rgba(0, 20, 40, 0.6)), url('src/3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        /* Custom gradient text from logo colors */
+        .gradient-text {
+            background: linear-gradient(45deg, #60a5fa, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Sticky Header Style on Scroll */
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        /* Scroll-triggered Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Custom button style */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap; /* Ensure text doesn't wrap in button */
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+        /* About section image styling */
+        .about-image-container {
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+        .about-image-container::before {
+            content: '';
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+            width: 100%;
+            height: 100%;
+            border: 5px solid #60a5fa;
+            border-radius: 0.75rem;
+            z-index: -1;
+            transition: all 0.3s ease-in-out;
+        }
+        .about-image-container:hover::before {
+            top: 0;
+            left: 0;
+        }
+        /* Style for date input placeholder */
+        input[type="date"]::before {
+            content: attr(placeholder);
+            position: absolute;
+            color: #9ca3af; /* gray-400 */
+        }
+        input[type="date"]:focus::before,
+        input[type="date"]:valid::before {
+            display: none;
+        }
+
+        /* Language Switcher Button */
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap; /* Prevent text wrapping inside buttons */
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+        .lang-switcher button:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .header-scrolled .lang-switcher button:hover:not(.active) {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Fix for language switcher buttons spacing */
+        .lang-switcher {
+            gap: 0.5rem; /* Use gap for consistent spacing in flex container */
+        }
+        
+        /* NEW: Ensure mobile menu button is visible on scrolled header */
+        .header-scrolled #mobile-menu-button {
+            color: #333; /* Darker color for visibility on light background */
+        }
+        .header-scrolled #mobile-menu-button i {
+            color: #333; /* Explicitly target the icon */
+        }
+    </style>
+</head>
+<body class="text-gray-700 lang-fr">
+
+    <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-white" id="nav-links">
+                <a href="#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4 md:gap-8"> 
+                <div class="lang-switcher flex">
+                    <button id="lang-fr-btn" class="active">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">
+                    Prendre RDV
+                </a>
+
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+            <a href="#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+            <a href="#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+            <a href="#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+            <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="accueil" class="hero-section h-screen flex items-center justify-center text-white text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 reveal" data-fr="L'art de la vision" data-ar="فن الإبصار">L'art de la vision</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto reveal" style="transition-delay: 200ms;" data-fr="Le Dr. Saada vous accompagne avec expertise et technologie pour la santé de vos yeux." data-ar="الدكتور سعادة يرافقكم بخبرة وتقنية من أجل صحة عيونكم.">
+                    Le Dr. Saada vous accompagne avec expertise et technologie pour la santé de vos yeux.
+                </p>
+                <div class="reveal" style="transition-delay: 400ms;">
+                    <a href="#a-propos" class="text-white text-lg font-semibold border-2 border-white rounded-full py-3 px-8 hover:bg-white hover:text-gray-800 transition duration-300" data-fr="Découvrir le cabinet" data-ar="اكتشف العيادة">
+                        Découvrir le cabinet
+                    </a>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+                <a href="#a-propos">
+                    <i class="fas fa-chevron-down fa-2x text-white/70"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="a-propos" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                    <div class="lg:w-5/12 reveal">
+                        <div class="about-image-container">
+                            <img src="src/5.jpg" alt="Photo du Dr. Saada" class="rounded-lg w-full h-auto">
+                        </div>
+                    </div>
+                    <div class="lg:w-7/12 reveal" style="transition-delay: 200ms;">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-fr="Dr. Saada, <br>Votre Partenaire Vision" data-ar="الدكتور سعادة، <br>شريككم في الرؤية">Dr. Saada, <br>Votre Partenaire Vision</h2>
+                        <p class="text-lg text-gray-600 mb-4 leading-relaxed" data-fr="Passionné par la complexité de l'œil et dévoué au bien-être de ses patients, le Dr. Saada allie une expertise médicale de pointe à une approche humaine et personnalisée." data-ar="شغوفًا بتركيب العين المعقد ومكرسًا لرفاهية مرضاه، يجمع الدكتور سعادة بين الخبرة الطبية المتطورة والنهج الإنساني والشخصي.">
+                            Passionné par la complexité de l'œil et dévoué au bien-être de ses patients, le Dr. Saada allie une expertise médicale de pointe à une approche humaine et personnalisée.
+                        </p>
+                        <p class="text-gray-600 mb-6 leading-relaxed" data-fr="Chaque consultation est un moment d'échange privilégié pour comprendre vos besoins et vous offrir les solutions les plus adaptées, qu'il s'agisse d'un simple contrôle, d'une pathologie complexe ou d'une chirurgie." data-ar="كل استشارة هي فرصة مميزة لفهم احتياجاتكم وتقديم الحلول الأنسب لكم، سواء كانت لفحص بسيط، أو لحالة مرضية معقدة، أو لإجراء جراحي.">
+                            Chaque consultation est un moment d'échange privilégié pour comprendre vos besoins et vous offrir les solutions les plus adaptées, qu'il s'agisse d'un simple contrôle, d'une pathologie complexe ou d'une chirurgie.
+                        </p>
+                        <div class="flex space-x-8" dir="ltr"> 
+                            <div class="flex items-center text-blue-600">
+                                <i class="fas fa-award fa-2x mr-3"></i>
+                                <div>
+                                    <span class="font-bold text-xl" data-fr="Expertise" data-ar="خبرة">Expertise</span><br>
+                                    <span class="text-gray-500" data-fr="Technologie de pointe" data-ar="تقنية متطورة">Technologie de pointe</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-blue-600">
+                                <i class="far fa-heart fa-2x mr-3"></i>
+                                <div>
+                                    <span class="font-bold text-xl" data-fr="Écoute" data-ar="اهتمام">Écoute</span><br>
+                                    <span class="text-gray-500" data-fr="Soins personnalisés" data-ar="رعاية شخصية">Soins personnalisés</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-24 bg-f0f4f8">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800" data-fr="Nos Soins et Expertises" data-ar="خدماتنا وخبراتنا">Nos Soins et Expertises</h2>
+                    <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto" data-fr="Découvrez notre gamme complète de soins oculaires, alliant technologie de pointe et expertise médicale pour préserver et améliorer votre vision." data-ar="اكتشفوا مجموعتنا المتكاملة من خدمات العناية بالعيون، التي تجمع بين أحدث التقنيات والخبرة الطبية للحفاظ على بصركم وتحسينه.">Découvrez notre gamme complète de soins oculaires, alliant technologie de pointe et expertise médicale pour préserver et améliorer votre vision.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Chirurgie Réfractive" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Chirurgie Réfractive" data-ar="جراحة تصحيح النظر بالليزر">Chirurgie Réfractive</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Chirurgie laser pour corriger la myopie, l’hypermétropie et l’astigmatisme, offrant une vision claire et naturelle sans altérer la cornée." data-ar="جراحة بالليزر لتصحيح قصر النظر، طول النظر والاستجماتيزم، توفر رؤية واضحة وطبيعية دون تغيير القرنية.">Chirurgie laser pour corriger la myopie, l’hypermétropie et l’astigmatisme, offrant une vision claire et naturelle sans altérer la cornée.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=refractive" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="2.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Correction de la vision" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Correction de la vision" data-ar="تصحيح البصر">Correction de la vision</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Solutions personnalisées pour traiter la myopie, l’hypermétropie et l’astigmatisme, afin de retrouver une vision nette et confortable au quotidien." data-ar="حلول مخصصة لعلاج قصر النظر، طول النظر والاستجماتيزم، لاستعادة رؤية واضحة ومريحة يوميًا.">Solutions personnalisées pour traiter la myopie, l’hypermétropie et l’astigmatisme, afin de retrouver une vision nette et confortable au quotidien.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=correction_vision" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="2.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Suivi du glaucome" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Suivi du glaucome" data-ar="متابعة الجلوكوما">Suivi du glaucome</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Prise en charge complète pour contrôler la pression oculaire, avec des solutions adaptées (laser ou chirurgie) pour préserver votre vision à long terme." data-ar="رعاية شاملة للتحكم في ضغط العين، مع حلول مناسبة (ليزر أو جراحة) للحفاظ على بصركم على المدى الطويل.">Prise en charge complète pour contrôler la pression oculaire, avec des solutions adaptées (laser ou chirurgie) pour préserver votre vision à long terme.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=glaucome" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="3.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Chirurgie de la cataracte" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Chirurgie de la cataracte" data-ar="جراحة الساد">Chirurgie de la cataracte</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Intervention précise au laser avec lentilles premium (IOL) pour une vision nette, souvent sans dépendance aux lunettes." data-ar="تدخل دقيق بالليزر مع عدسات عالية الجودة (IOL) لرؤية واضحة، غالبًا دون الحاجة للنظارات.">Intervention précise au laser avec lentilles premium (IOL) pour une vision nette, souvent sans dépendance aux lunettes.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=cataracte" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="4.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Examens oculaires" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Examens oculaires" data-ar="فحوصات العين">Examens oculaires</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Consultations complètes pour adultes et enfants. Prévention, dépistage et suivi personnalisé pour une vision claire et durable." data-ar="استشارات شاملة للكبار والأطفال. الوقاية، الكشف المبكر والمتابعة الشخصية لرؤية واضحة ومستمرة.">Consultations complètes pour adultes et enfants. Prévention, dépistage et suivi personnalisé pour une vision claire et durable.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=examens_oculaires" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="5.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Chirurgie des paupières" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Chirurgie des paupières" data-ar="جراحة الجفون">Chirurgie des paupières</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Interventions fonctionnelles et esthétiques pour redonner confort et éclat à votre regard." data-ar="تدخلات وظيفية وتجميلية لإعادة الراحة والإشراق لعيونكم.">Interventions fonctionnelles et esthétiques pour redonner confort et éclat à votre regard.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=paupieres" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="6.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Maladies de la rétine" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Maladies de la rétine" data-ar="أمراض الشبكية">Maladies de la rétine</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Diagnostic et traitement des pathologies rétiniennes, avec chirurgie si nécessaire, pour préserver votre vision." data-ar="تشخيص وعلاج أمراض الشبكية، مع جراحة إذا لزم الأمر، للحفاظ على بصركم.">Diagnostic et traitement des pathologies rétiniennes, avec chirurgie si nécessaire, pour préserver votre vision.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=retine" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="7.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Chirurgie du strabisme" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Chirurgie du strabisme" data-ar="جراحة الحول">Chirurgie du strabisme</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Correction chirurgicale pour aligner les yeux et restaurer une vision harmonieuse." data-ar="تصحيح جراحي لمحاذاة العينين واستعادة رؤية متناسقة.">Correction chirurgicale pour aligner les yeux et restaurer une vision harmonieuse.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=strabisme" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="8.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Voies lacrymales" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Voies lacrymales" data-ar="المسالك الدمعية">Voies lacrymales</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Chirurgie pour traiter les obstructions et rétablir le flux lacrymal." data-ar="جراحة لعلاج الانسدادات واستعادة تدفق الدموع.">Chirurgie pour traiter les obstructions et rétablir le flux lacrymal.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=voies_lacrymales" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="9.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Lentilles de contact" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Lentilles de contact" data-ar="العدسات اللاصقة">Lentilles de contact</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Adaptées à votre vue, confortables et personnalisées pour une correction optimale." data-ar="متكيفة مع بصركم، مريحة ومخصصة لتصحيح مثالي.">Adaptées à votre vue, confortables et personnalisées pour une correction optimale.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=lentilles" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="10.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                        <img src="src/1.jpg" alt="Suivi du kératocône" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3" data-fr="Suivi du kératocône" data-ar="متابعة القرنية المخروطية">Suivi du kératocône</h3>
+                            <p class="text-gray-600 mb-4 flex-grow" data-fr="Suivi et traitements innovants pour stabiliser et améliorer la vision en cas de déformation cornéenne." data-ar="متابعة وعلاجات مبتكرة لتثبيت وتحسين الرؤية في حالة تشوه القرنية.">Suivi et traitements innovants pour stabiliser et améliorer la vision en cas de déformation cornéenne.</p>
+                            <div class="mt-auto pt-4">
+                                <a href="rdv.html?service=keratocone" class="block w-full text-center btn-primary text-white font-bold py-2 px-4 rounded-full text-sm" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                                <a href="11.html" class="block text-center mt-3 font-semibold text-blue-600 hover:underline" data-fr="Plus de détails" data-ar="المزيد من التفاصيل">Plus de détails <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-rdv" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center reveal">
+               <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Prêt à prendre soin de votre vision ?" data-ar="هل أنت مستعد للعناية ببصرك؟">Prêt à prendre soin de votre vision ?</h2>
+               <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="N'attendez plus. Prenez rendez-vous dès aujourd'hui pour une consultation complète avec le Dr. Saada." data-ar="لا تنتظر أكثر. احجز موعدك اليوم لاستشارة شاملة مع الدكتور سعادة.">N'attendez plus. Prenez rendez-vous dès aujourd'hui pour une consultation complète avec le Dr. Saada.</p>
+               <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+       </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Header scroll effect
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const logo = document.getElementById('logo-img');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                    if(navLinks) {
+                        navLinks.classList.remove('text-white');
+                        navLinks.classList.add('text-gray-700');
+                    }
+                } else {
+                    header.classList.remove('header-scrolled');
+                    if(navLinks) {
+                        navLinks.classList.add('text-white');
+                        navLinks.classList.remove('text-gray-700');
+                    }
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Scroll Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target); // Unobserve after it becomes visible
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Language Switcher Logic
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                // Update body class for font and potentially RTL
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                if (lang === 'ar') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
+                }
+
+                // Update active button state
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                // Translate all elements with data-fr and data-ar attributes
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation) { // Check if a translation exists for the current language
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.setAttribute('placeholder', translation);
+                        } else {
+                            // Using innerHTML to correctly render <br> tags if they exist in the attribute
+                            element.innerHTML = translation;
+                        }
+                    }
+                });
+            }
+
+            // Initial language setting (from localStorage or default to French)
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+        });
+    </script>
+</body>
+</html>

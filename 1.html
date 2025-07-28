@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Service - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.rtl {
+            direction: rtl;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Header styles */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+        /* Language switcher button styles */
+        .lang-switch-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #fff;
+            color: #fff;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .header-scrolled .lang-switch-btn {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-color: #363795;
+            color: #363795;
+        }
+        .lang-switch-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+         .header-scrolled .lang-switch-btn:hover {
+            background-color: #363795;
+            color: #fff;
+        }
+    </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+   <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .lang-ar, body.rtl {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.rtl {
+            direction: rtl;
+        }
+        .hidden {
+            display: none;
+        }
+        
+        /* Header Styling */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* RTL Overlap Fix - This is the new, crucial part */
+        body.rtl #nav-links > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 0; /* Remove default LTR spacing */
+            margin-right: 2rem; /* Apply correct RTL spacing (8 * 0.25rem) */
+        }
+        body.rtl #header-buttons-container > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 0; /* Remove default LTR spacing */
+            margin-right: 1rem; /* Apply correct RTL spacing (4 * 0.25rem) */
+        }
+        
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+
+        /* Language Switcher Button */
+        .lang-switch-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #fff;
+            color: #fff;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .header-scrolled .lang-switch-btn {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-color: #363795;
+            color: #363795;
+        }
+        .lang-switch-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+         .header-scrolled .lang-switch-btn:hover {
+            background-color: #363795;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8" id="nav-links">                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300"><span class="lang-fr">Accueil</span><span class="lang-ar hidden">الرئيسية</span></a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300"><span class="lang-fr">Le Docteur</span><span class="lang-ar hidden">عن الطبيب</span></a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300"><span class="lang-fr">Services</span><span class="lang-ar hidden">الخدمات</span></a>
+                <a href="index.html#contact" class="hover:text-blue-300 transition duration-300"><span class="lang-fr">Contact</span><span class="lang-ar hidden">اتصل بنا</span></a>
+            </div>
+
+           <div id="header-buttons-container" class="flex items-center gap-4">                 <button id="lang-switcher" class="lang-switch-btn py-2 px-4">
+                    <span class="lang-fr">AR</span><span class="lang-ar hidden">FR</span>
+                </button>
+                <a href="index.html#rendez-vous" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full">
+                    <span class="lang-fr">Prendre RDV</span><span class="lang-ar hidden">أخذ موعد</span>
+                </a>
+                 <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+            <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200"><span class="lang-fr">Accueil</span><span class="lang-ar hidden">الرئيسية</span></a>
+            <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200"><span class="lang-fr">Le Docteur</span><span class="lang-ar hidden">عن الطبيب</span></a>
+            <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200"><span class="lang-fr">Services</span><span class="lang-ar hidden">الخدمات</span></a>
+            <a href="index.html#contact" class="block py-3 px-6 text-gray-700 hover:bg-gray-200"><span class="lang-fr">Contact</span><span class="lang-ar hidden">اتصل بنا</span></a>
+            <div class="p-4">
+                <a href="index.html#rendez-vous" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full"><span class="lang-fr">Prendre RDV</span><span class="lang-ar hidden">أخذ موعد</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold"><span class="lang-fr">Nos Services</span><span class="lang-ar hidden">خدماتنا</span></p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2"><span class="lang-fr">Implantation de lentilles ICL</span><span class="lang-ar hidden">زرع عدسات ICL</span></h1>
+            </div>
+        </section>
+
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6"><span class="lang-fr">Détails de l'intervention</span><span class="lang-ar hidden">تفاصيل العملية</span></h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            <span class="lang-fr">Les lentilles ICL (Implantable Collamer Lens) sont des lentilles intraoculaires utilisées pour corriger la myopie, l'hypermétropie et parfois l'astigmatisme. L'implantation de lentilles ICL est une procédure réversible qui ne nécessite pas de modification permanente de la cornée. Elle est particulièrement adaptée aux patients non éligibles à la chirurgie laser (comme le LASIK) ou qui préfèrent une alternative.</span>
+                            <span class="lang-ar hidden">عدسات ICL (عدسات كولامر قابلة للزرع) هي عدسات داخل العين تستخدم لتصحيح قصر النظر، طول النظر، وأحيانًا الاستجماتيزم. زرع عدسات ICL هو إجراء قابل للعكس ولا يتطلب تعديلاً دائماً للقرنية. وهو مناسب بشكل خاص للمرضى غير المؤهلين لجراحة الليزر (مثل الليزك) أو الذين يفضلون بديلاً آخر.</span>
+                        </p>
+                         <p class="text-gray-600 mb-8 leading-relaxed">
+                           <span class="lang-fr">L'implantation se fait généralement en ambulatoire, sous anesthésie locale, et le temps de récupération est court. Cette technique offre une excellente qualité visuelle et peut être une solution pour de nombreux patients.</span>
+                           <span class="lang-ar hidden">يتم الزرع عادة في العيادات الخارجية تحت تخدير موضعي، وفترة الشفاء قصيرة. توفر هذه التقنية جودة بصرية ممتازة ويمكن أن تكون حلاً للعديد من المرضى.</span>
+                        </p>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                            <h4 class="font-bold text-xl text-gray-800 mb-3"><span class="lang-fr">Avantages Clés</span><span class="lang-ar hidden">المزايا الرئيسية</span></h4>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i><span><strong><span class="lang-fr">Procédure réversible :</span><span class="lang-ar hidden">إجراء قابل للعكس:</span></strong> <span class="lang-fr">La lentille peut être retirée si nécessaire.</span><span class="lang-ar hidden">يمكن إزالة العدسة إذا لزم الأمر.</span></span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i><span><strong><span class="lang-fr">Haute qualité de vision :</span><span class="lang-ar hidden">جودة رؤية عالية:</span></strong> <span class="lang-fr">Offre une vision nette et claire.</span><span class="lang-ar hidden">توفر رؤية واضحة ونقية.</span></span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i><span><strong><span class="lang-fr">Protection UV :</span><span class="lang-ar hidden">حماية من الأشعة فوق البنفسجية:</span></strong> <span class="lang-fr">Le matériau de la lentille filtre les rayons UV.</span><span class="lang-ar hidden">مادة العدسة تقوم بتصفية الأشعة فوق البنفسجية.</span></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6"><span class="lang-fr">Résultats : Avant et Après</span><span class="lang-ar hidden">النتائج: قبل وبعد</span></h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=AVANT" alt="Exemple Avant Opération" class="rounded-lg shadow-lg w-full">
+                                <p class="text-center mt-2 font-semibold text-gray-500"><span class="lang-fr">Avant</span><span class="lang-ar hidden">قبل</span></p>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/400x300/a5b4fc/ffffff?text=APRÈS" alt="Exemple Après Opération" class="rounded-lg shadow-lg w-full">
+                                <p class="text-center mt-2 font-semibold text-blue-600"><span class="lang-fr">Après</span><span class="lang-ar hidden">بعد</span></p>
+                            </div>
+                             <div>
+                                <img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=AVANT" alt="Exemple Avant Opération" class="rounded-lg shadow-lg w-full">
+                                <p class="text-center mt-2 font-semibold text-gray-500"><span class="lang-fr">Avant</span><span class="lang-ar hidden">قبل</span></p>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/400x300/a5b4fc/ffffff?text=APRÈS" alt="Exemple Après Opération" class="rounded-lg shadow-lg w-full">
+                                <p class="text-center mt-2 font-semibold text-blue-600"><span class="lang-fr">Après</span><span class="lang-ar hidden">بعد</span></p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 italic"><span class="lang-fr">Les images sont des illustrations. Les résultats réels peuvent varier en fonction du patient.</span><span class="lang-ar hidden">الصور هي لأغراض توضيحية. قد تختلف النتائج الفعلية حسب المريض.</span></p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800"><span class="lang-fr">Prêt à retrouver une vision claire ?</span><span class="lang-ar hidden">هل أنت مستعد لاستعادة رؤية واضحة؟</span></h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto">
+                    <span class="lang-fr">Contactez-nous pour une consultation et découvrez si l'implantation de lentilles ICL est la solution idéale pour vous.</span>
+                    <span class="lang-ar hidden">اتصل بنا للحصول على استشارة واكتشف ما إذا كان زرع عدسات ICL هو الحل المثالي لك.</span>
+                </p>
+                <a href="index.html#rendez-vous" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block">
+                    <span class="lang-fr">Prendre un Rendez-vous</span><span class="lang-ar hidden">أخذ موعد</span>
+                </a>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p><span class="lang-fr">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</span><span class="lang-ar hidden">© 2025 دكتور سعدة لطب العيون. جميع الحقوق محفوظة.</span></p>
+            <p class="text-sm mt-2"><span class="lang-fr">Une vision claire pour un avenir radieux.</span><span class="lang-ar hidden">رؤية واضحة لمستقبل مشرق.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
+            const langSwitcher = document.getElementById('lang-switcher');
+            const htmlEl = document.documentElement;
+
+            // Function to handle header style on scroll
+            const handleScroll = () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-gray-700');
+                    mobileMenuButtonIcon.classList.remove('text-white');
+                    mobileMenuButtonIcon.classList.add('text-gray-700');
+                } else {
+                    // This part is mainly for the homepage, but good to have for consistency
+                    header.classList.remove('header-scrolled');
+                    navLinks.classList.add('text-white');
+                    navLinks.classList.remove('text-gray-700');
+                    mobileMenuButtonIcon.classList.add('text-white');
+                    mobileMenuButtonIcon.classList.remove('text-gray-700');
+                }
+            };
+            
+            // Set initial header state on page load
+            // Since this is a subpage, we force the scrolled state from the start
+            header.classList.add('header-scrolled');
+            navLinks.classList.remove('text-white');
+            navLinks.classList.add('text-gray-700');
+            mobileMenuButtonIcon.classList.remove('text-white');
+            mobileMenuButtonIcon.classList.add('text-gray-700');
+            
+            // Add scroll listener
+            window.addEventListener('scroll', handleScroll);
+
+            // --- Language Switcher Logic ---
+            const setLanguage = (lang) => {
+                htmlEl.setAttribute('lang', lang);
+                document.body.classList.toggle('rtl', lang === 'ar');
+                
+                document.querySelectorAll('.lang-fr, .lang-ar').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                document.querySelectorAll(`.lang-${lang}`).forEach(el => {
+                    el.classList.remove('hidden');
+                });
+
+                localStorage.setItem('language', lang);
+            };
+
+            langSwitcher.addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'ar' : 'fr';
+                setLanguage(newLang);
+            });
+            
+            const initialLang = localStorage.getItem('language') || 'fr';
+            setLanguage(initialLang);
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

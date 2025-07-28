@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Oculaire de Routine - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Arabic Font specific */
+        body.lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        /* Header Styling */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+
+        /* Language Switcher Button */
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+   <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8" id="nav-links">
+                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div id="header-buttons-container" class="flex items-center gap-4">
+                <div class="lang-switcher flex gap-2">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+             <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+             <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+             <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+             <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold" data-fr="Nos Services" data-ar="خدماتنا">Nos Services</p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2" data-fr="Examen Oculaire de Routine" data-ar="فحص العين الروتيني">Examen Oculaire de Routine</h1>
+            </div>
+        </section>
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="L'importance du contrôle régulier" data-ar="أهمية الفحص الدوري">L'importance du contrôle régulier</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-fr="Un examen ophtalmologique de routine permet de déterminer la prescription de vos lunettes et de donner une idée générale sur la présence d'éventuelles anomalies ou maladies à l'intérieur de l'œil." data-ar="يسمح فحص العين الروتيني بتحديد وصفة نظاراتك وإعطاء فكرة عامة عن وجود أي تشوهات أو أمراض محتملة داخل العين.">Un examen ophtalmologique de routine permet de déterminer la prescription de vos lunettes et de donner une idée générale sur la présence d'éventuelles anomalies ou maladies à l'intérieur de l'œil.</p>
+                        <p class="text-gray-600 mb-6" data-fr="Cet examen guide le médecin et le patient et peut également nécessiter des examens complémentaires ou une imagerie selon la situation. Le médecin examine l'état de l'œil et fournit les ordonnances nécessaires pour des lunettes ou des médicaments." data-ar="يوجه هذا الفحص الطبيب والمريض وقد يتطلب أيضًا فحوصات تكميلية أو تصويرًا حسب الحالة. يفحص الطبيب حالة العين ويقدم الوصفات الطبية اللازمة للنظارات أو الأدوية.">Cet examen guide le médecin et le patient et peut également nécessiter des examens complémentaires ou une imagerie selon la situation. Le médecin examine l'état de l'œil et fournit les ordonnances nécessaires pour des lunettes ou des médicaments.</p>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                            <h4 class="font-bold text-xl text-gray-800 mb-3" data-fr="Que détecte un examen ?" data-ar="ماذا يكشف الفحص؟">Que détecte un examen ?</h4>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Détermination précise de la correction visuelle." data-ar="تحديد دقيق لتصحيح البصر.">Détermination précise de la correction visuelle.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Dépistage de maladies comme le glaucome ou la cataracte." data-ar="الكشف عن أمراض مثل الجلوكوما والساد.">Dépistage de maladies comme le glaucome ou la cataracte.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Examen du fond d'œil pour surveiller la rétine." data-ar="فحص قاع العين لمراقبة الشبكية.">Examen du fond d'œil pour surveiller la rétine.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3 rtl:ml-3 rtl:mr-0"></i><span data-fr="Conseils personnalisés pour la santé de vos yeux." data-ar="نصائح شخصية لصحة عينيك.">Conseils personnalisés pour la santé de vos yeux.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Un examen pour tous les âges" data-ar="فحص لجميع الأعمار">Un examen pour tous les âges</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Des examens spécifiques sont nécessaires pour les enfants de moins de 5 ans qui ne peuvent pas utiliser les appareils standards, afin d'assurer une évaluation précise de leur vision." data-ar="تلزم فحوصات خاصة للأطفال دون سن 5 سنوات الذين لا يستطيعون استخدام الأجهزة القياسية، لضمان تقييم دقيق لرؤيتهم.">Des examens spécifiques sont nécessaires pour les enfants de moins de 5 ans qui ne peuvent pas utiliser les appareils standards, afin d'assurer une évaluation précise de leur vision.</p>
+                        <img src="https://placehold.co/600x400/a5b4fc/ffffff?text=Examen+de+la+vue" alt="Examen de la vue" class="rounded-lg shadow-lg w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Votre vision est précieuse. Protégez-la." data-ar="رؤيتك ثمينة. احمها.">Votre vision est précieuse. Protégez-la.</h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="Un simple contrôle peut faire toute la différence. N'attendez pas que les symptômes apparaissent pour consulter." data-ar="فحص بسيط يمكن أن يحدث فرقًا كبيرًا. لا تنتظر ظهور الأعراض لاستشارة الطبيب.">Un simple contrôle peut faire toute la différence. N'attendez pas que les symptômes apparaissent pour consulter.</p>
+                <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Réserver mon contrôle" data-ar="حجز فحصي">Réserver mon contrôle</a>
+             </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
+            
+            const handleHeaderStyle = () => {
+                header.classList.add('header-scrolled');
+                if (navLinks) {
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-gray-700');
+                }
+                if (mobileMenuButtonIcon) {
+                    mobileMenuButtonIcon.classList.add('text-gray-700');
+                }
+            };
+            
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                if (lang === 'ar') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
+                }
+
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation) {
+                       element.innerHTML = translation;
+                    }
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+
+            handleHeaderStyle();
+        });
+    </script>
+</body>
+</html>

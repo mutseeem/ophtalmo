@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Saada - Prendre Rendez-vous</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Base styles & typography */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #0c1a2e;
+            overflow-x: hidden;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        body.lang-ar, body.lang-ar h1, body.lang-ar h2 {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* Fullscreen background */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(rgba(12, 26, 46, 0.7), rgba(12, 26, 46, 0.85)), url('src/3.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        /* --- MODIFIED HEADER --- */
+        .glass-header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            background-color: rgba(12, 26, 46, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e5e7eb;
+            padding: 8px 12px;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+            transform: scale(1.05);
+        }
+        .lang-switcher button:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        /* --- MAIN LAYOUT --- */
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 100px 1rem 2rem 1rem; /* 100px top padding is CRUCIAL */
+        }
+        
+        /* --- FLOATING FORM CARD --- */
+        .form-card {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden; 
+            animation: scale-up-fade-in 0.7s ease-out forwards;
+        }
+        .form-card-header {
+            padding: 2rem 2.5rem;
+        }
+        .form-card-accent {
+            height: 6px;
+            background: linear-gradient(45deg, #005c97, #363795);
+        }
+        .form-card-body {
+            padding: 0.5rem 2.5rem 2.5rem 2.5rem;
+        }
+
+        /* Polished Form Inputs */
+        .input-wrapper { position: relative; }
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            transition: color 0.3s ease;
+        }
+        body.lang-ar .input-icon { left: auto; right: 1rem; }
+        .form-input {
+            width: 100%;
+            font-size: 1rem;
+            background-color: #f0f4f8;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.9rem 1rem 0.9rem 3rem; 
+            transition: all 0.3s ease;
+        }
+        body.lang-ar .form-input { padding: 0.9rem 3rem 0.9rem 1rem; }
+        .form-input:focus {
+            outline: none;
+            border-color: #363795;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(54, 55, 149, 0.2);
+        }
+        .form-input:focus + .input-icon { color: #363795; }
+        input[type="date"]:not(:valid)::before { content: attr(placeholder); color: #6b7280; }
+        
+        /* Polished Submit Button */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.4);
+        }
+
+        /* Animation */
+        @keyframes scale-up-fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="lang-fr">
+
+    <div class="page-background"></div>
+
+    <header class="glass-header">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="opacity-90 hover:opacity-100 transition-opacity">
+                <img src="src/6.jpg" alt="Logo Dr. Saada" class="h-10 rounded-md">
+            </a>
+
+            <div class="hidden md:flex items-center gap-6 text-gray-200 font-semibold">
+                <a href="index.html#accueil" class="hover:text-white transition-colors duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-white transition-colors duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-white transition-colors duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-white transition-colors duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div class="flex items-center">
+                <div class="lang-switcher">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        
+        <div class="form-card">
+            <div class="form-card-accent"></div>
+            <div class="form-card-header text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Demande de Rendez-vous" data-ar="طلب موعد">Demande de Rendez-vous</h2>
+                <p class="text-gray-500 mt-2" data-fr="Remplissez vos informations ci-dessous." data-ar="املأ معلوماتك أدناه.">Remplissez vos informations ci-dessous.</p>
+            </div>
+            
+            <div class="form-card-body">
+                <form id="rdv-form" novalidate class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="input-wrapper">
+                            <input type="text" required class="form-input" data-fr-placeholder="Nom complet *" data-ar-placeholder="الاسم الكامل *">
+                            <i class="input-icon fas fa-user"></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="tel" required class="form-input" data-fr-placeholder="N° de téléphone *" data-ar-placeholder="رقم الهاتف *">
+                            <i class="input-icon fas fa-phone"></i>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <input type="date" required class="form-input" data-fr-placeholder="Date de naissance *" data-ar-placeholder="تاريخ الميلاد *">
+                        <i class="input-icon fas fa-calendar-alt"></i>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <input type="email" class="form-input" data-fr-placeholder="Adresse e-mail (facultatif)" data-ar-placeholder="البريد الإلكتروني (اختياري)">
+                        <i class="input-icon fas fa-envelope"></i>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <select required class="form-input" id="motif-select">
+                            <option value="" disabled selected data-fr="Sélectionner un motif de visite..." data-ar="اختر سبب الزيارة...">Sélectionner un motif de visite...</option>
+                            <option value="refractive" data-fr="Chirurgie Réfractive" data-ar="جراحة تصحيح النظر">Chirurgie Réfractive</option>
+                            <option value="correction_vision" data-fr="Correction de la vision" data-ar="تصحيح البصر">Correction de la vision</option>
+                            <option value="glaucome" data-fr="Suivi du glaucome" data-ar="متابعة الجلوكوما">Suivi du glaucome</option>
+                            <option value="cataracte" data-fr="Chirurgie de la cataracte" data-ar="جراحة الساد">Chirurgie de la cataracte</option>
+                            <option value="examens_oculaires" data-fr="Examens oculaires" data-ar="فحوصات العين">Examens oculaires</option>
+                            <option value="paupieres" data-fr="Chirurgie des paupières" data-ar="جراحة الجفون">Chirurgie des paupières</option>
+                            <option value="retine" data-fr="Maladies de la rétine" data-ar="أمراض الشبكية">Maladies de la rétine</option>
+                            <option value="strabisme" data-fr="Chirurgie du strabisme" data-ar="جراحة الحول">Chirurgie du strabisme</option>
+                            <option value="voies_lacrymales" data-fr="Voies lacrymales" data-ar="المسالك الدمعية">Voies lacrymales</option>
+                            <option value="lentilles" data-fr="Lentilles de contact" data-ar="العدسات اللاصقة">Lentilles de contact</option>
+                            <option value="keratocone" data-fr="Suivi du kératocône" data-ar="متابعة القرنية المخروطية">Suivi du kératocône</option>
+                        </select>
+                        <i class="input-icon fas fa-eye"></i>
+                    </div>
+
+                    <div>
+                        <textarea rows="4" class="form-input" style="padding-left: 1rem; padding-right: 1rem;" data-fr-placeholder="Ajouter un message (facultatif)" data-ar-placeholder="إضافة رسالة (اختياري)"></textarea>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full btn-primary text-white font-bold py-3 px-8 rounded-full text-lg flex items-center justify-center gap-3">
+                            <span data-fr="Envoyer la Demande" data-ar="إرسال الطلب">Envoyer la Demande</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-full shadow-xl transition-all duration-500 transform translate-y-20 opacity-0 flex items-center gap-3">
+        <i class="fas fa-check-circle fa-lg"></i>
+        <span data-fr="Demande envoyée avec succès !" data-ar="تم إرسال الطلب بنجاح!">Demande envoyée avec succès !</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation !== null) {
+                         if (element.tagName === 'BUTTON' && element.querySelector('span')) {
+                            const span = element.querySelector('span');
+                            if (span) {
+                                span.innerHTML = translation;
+                            }
+                        } else {
+                            element.innerHTML = translation;
+                        }
+                    }
+                });
+                
+                document.querySelectorAll('[data-fr-placeholder], [data-ar-placeholder]').forEach(element => {
+                    const placeholder = element.getAttribute(`data-${lang}-placeholder`);
+                    if (placeholder) {
+                        element.setAttribute('placeholder', placeholder);
+                    }
+                });
+            }
+
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                if (!langFrBtn.classList.contains('active')) {
+                   setLanguage('fr');
+                   localStorage.setItem('preferredLang', 'fr');
+                }
+            });
+
+            langArBtn.addEventListener('click', () => {
+                if (!langArBtn.classList.contains('active')) {
+                    setLanguage('ar');
+                    localStorage.setItem('preferredLang', 'ar');
+                }
+            });
+            
+            // Pre-select service based on URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const service = urlParams.get('service');
+            
+            if (service) {
+                const motifSelect = document.getElementById('motif-select');
+                if (motifSelect && motifSelect.querySelector('option[value="' + service + '"]')) {
+                    motifSelect.value = service;
+                }
+            }
+
+            const rdvForm = document.getElementById('rdv-form');
+            const toast = document.getElementById('toast');
+            rdvForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if(rdvForm.checkValidity()){
+                    toast.classList.remove('translate-y-20', 'opacity-0');
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-20', 'opacity-0');
+                    }, 4000);
+                    rdvForm.reset();
+                } else {
+                    rdvForm.reportValidity();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

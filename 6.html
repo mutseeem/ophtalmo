@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirurgie Esthétique des Paupières - Dr. Saada Ophtalmologue</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Arabic Font specific */
+        body.lang-ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+        body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        /* Header Styling */
+        #main-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #005c97, #363795);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
+        }
+
+        /* Language Switcher Button */
+        .lang-switcher button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .lang-switcher button.active {
+            background-color: white;
+            color: #005c97;
+            border-color: white;
+        }
+        .header-scrolled .lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        .header-scrolled .lang-switcher button.active {
+            background-color: #005c97;
+            color: white;
+            border-color: #005c97;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+   <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14 transition-all duration-300">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8" id="nav-links">
+                <a href="index.html#accueil" class="hover:text-blue-300 transition duration-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+                <a href="index.html#a-propos" class="hover:text-blue-300 transition duration-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+                <a href="index.html#services" class="hover:text-blue-300 transition duration-300" data-fr="Services" data-ar="الخدمات">Services</a>
+                <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            </div>
+
+            <div id="header-buttons-container" class="flex items-center gap-4">
+                <div class="lang-switcher flex gap-2">
+                    <button id="lang-fr-btn">FR</button>
+                    <button id="lang-ar-btn">AR</button>
+                </div>
+                <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-sm">
+             <a href="index.html#accueil" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+             <a href="index.html#a-propos" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+             <a href="index.html#services" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Services" data-ar="الخدمات">Services</a>
+             <a href="contact.html" class="block py-3 px-6 text-gray-700 hover:bg-gray-200" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+            <div class="p-4">
+                <a href="rdv.html" class="block text-center btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">Prendre RDV</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-gray-800 text-white text-center py-24" style="background-image: linear-gradient(rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.8)), url('src/4.jpg'); background-size: cover; background-position: center;">
+            <div class="container mx-auto px-6 mt-16">
+                <p class="text-lg text-blue-300 font-semibold" data-fr="Nos Services" data-ar="خدماتنا">Nos Services</p>
+                <h1 class="text-4xl md:text-6xl font-bold mt-2" data-fr="Chirurgie Esthétique des Paupières" data-ar="جراحة الجفون التجميلية">Chirurgie Esthétique des Paupières</h1>
+            </div>
+        </section>
+        <section id="details" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-fr="L'esthétique des paupières et ses techniques" data-ar="تجميل الجفون وتقنياته">L'esthétique des paupières et ses techniques</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-fr="L’esthétique des paupières, ou blépharoplastie, vise à rajeunir le regard en corrigeant l’excès de peau, les poches graisseuses et les rides qui donnent un aspect fatigué ou vieilli." data-ar="يهدف تجميل الجفون، أو رأب الجفن، إلى تجديد شباب النظرة عن طريق تصحيح الجلد الزائد والجيوب الدهنية والتجاعيد التي تعطي مظهراً متعباً أو متقدماً في السن.">L’esthétique des paupières, ou blépharoplastie, vise à rajeunir le regard en corrigeant l’excès de peau, les poches graisseuses et les rides qui donnent un aspect fatigué ou vieilli.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-fr="Anatomie et vieillissement des paupières" data-ar="تشريح وشيخوخة الجفون">Anatomie et vieillissement des paupières</h3>
+                        <p class="text-gray-600 mb-6" data-fr="Avec l’âge, la peau des paupières perd en élasticité, les muscles se relâchent et des accumulations de graisse peuvent apparaître. Ces changements entraînent des paupières tombantes (ptose), des cernes creux ou gonflés et des rides marquées." data-ar="مع تقدم العمر، يفقد جلد الجفون مرونته، وترتخي العضلات، وقد تظهر تراكمات دهنية. تؤدي هذه التغييرات إلى تدلي الجفون (ptosis)، وهالات سوداء غائرة أو منتفخة، وتجاعيد واضحة.">Avec l’âge, la peau des paupières perd en élasticité, les muscles se relâchent et des accumulations de graisse peuvent apparaître. Ces changements entraînent des paupières tombantes (ptose), des cernes creux ou gonflés et des rides marquées.</p>
+                        
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-fr="Techniques chirurgicales" data-ar="التقنيات الجراحية">Techniques chirurgicales</h3>
+                        <ul class="space-y-3 list-disc list-inside text-gray-700 mb-6">
+                            <li data-fr="<strong>Blépharoplastie supérieure:</strong> Retrait de l’excès de peau et parfois de graisse pour corriger la paupière tombante et ouvrir le regard." data-ar="<strong>رأب الجفن العلوي:</strong> إزالة الجلد الزائد وأحيانًا الدهون لتصحيح الجفن المتدلي وفتح النظرة."><strong>Blépharoplastie supérieure:</strong> Retrait de l’excès de peau et parfois de graisse pour corriger la paupière tombante et ouvrir le regard.</li>
+                            <li data-fr="<strong>Blépharoplastie inférieure:</strong> Traitement des poches sous les yeux en retirant ou repositionnant la graisse." data-ar="<strong>رأب الجفن السفلي:</strong> علاج الجيوب تحت العين عن طريق إزالة أو إعادة تموضع الدهون."><strong>Blépharoplastie inférieure:</strong> Traitement des poches sous les yeux en retirant ou repositionnant la graisse.</li>
+                            <li data-fr="<strong>Voie transconjonctivale:</strong> Technique sans cicatrice externe pour enlever les poches graisseuses sans retirer de peau." data-ar="<strong>عبر الملتحمة:</strong> تقنية بدون ندبة خارجية لإزالة الجيوب الدهنية دون إزالة الجلد."><strong>Voie transconjonctivale:</strong> Technique sans cicatrice externe pour enlever les poches graisseuses sans retirer de peau.</li>
+                            <li data-fr="<strong>Canthopexie / canthoplastie:</strong> Renforcement du canthus externe pour retendre la paupière inférieure." data-ar="<strong>تثبيت الموق / رأب الموق:</strong> تقوية الموق الخارجي لشد الجفن السفلي."><strong>Canthopexie / canthoplastie:</strong> Renforcement du canthus externe pour retendre la paupière inférieure.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-fr="Techniques non chirurgicales" data-ar="التقنيات غير الجراحية">Techniques non chirurgicales</h3>
+                         <ul class="space-y-3 list-disc list-inside text-gray-700 mb-6">
+                            <li data-fr="<strong>Toxine botulique (Botox):</strong> Atténue les rides d’expression autour des yeux." data-ar="<strong>توكسين البوتولينوم (البوتوكس):</strong> يخفف تجاعيد التعبير حول العينين."><strong>Toxine botulique (Botox):</strong> Atténue les rides d’expression autour des yeux.</li>
+                            <li data-fr="<strong>Acide hyaluronique:</strong> Comble les cernes creux et redonne du volume." data-ar="<strong>حمض الهيالورونيك:</strong> يملأ الهالات السوداء الغائرة ويعيد الحجم."><strong>Acide hyaluronique:</strong> Comble les cernes creux et redonne du volume.</li>
+                            <li data-fr="<strong>Laser CO₂ / Radiofréquence:</strong> Stimule la production de collagène pour retendre la peau." data-ar="<strong>ليزر ثاني أكسيد الكربون / الترددات الراديوية:</strong> يحفز إنتاج الكولاجين لشد الجلد."><strong>Laser CO₂ / Radiofréquence:</strong> Stimule la production de collagène pour retendre la peau.</li>
+                        </ul>
+                         <p class="text-gray-600" data-fr="Ces techniques permettent d’obtenir un regard plus jeune et reposé, en fonction des besoins et des attentes du patient." data-ar="تسمح هذه التقنيات بالحصول على نظرة أكثر شبابًا وراحة، بناءً على احتياجات وتوقعات المريض.">Ces techniques permettent d’obtenir un regard plus jeune et reposé, en fonction des besoins et des attentes du patient.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6" data-fr="Résultats : Avant et Après" data-ar="النتائج: قبل وبعد">Résultats : Avant et Après</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=AVANT" alt="Exemple Avant Opération" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-gray-500" data-fr="Avant" data-ar="قبل">Avant</p></div>
+                            <div><img src="https://placehold.co/400x300/a5b4fc/ffffff?text=APRÈS" alt="Exemple Après Opération" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-blue-600" data-fr="Après" data-ar="بعد">Après</p></div>
+                             <div><img src="https://placehold.co/400x300/e2e8f0/94a3b8?text=AVANT" alt="Exemple Avant Opération" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-gray-500" data-fr="Avant" data-ar="قبل">Avant</p></div>
+                            <div><img src="https://placehold.co/400x300/a5b4fc/ffffff?text=APRÈS" alt="Exemple Après Opération" class="rounded-lg shadow-lg w-full"><p class="text-center mt-2 font-semibold text-blue-600" data-fr="Après" data-ar="بعد">Après</p></div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 italic" data-fr="Les images sont des illustrations. Les résultats réels peuvent varier en fonction du patient." data-ar="الصور للتوضيح فقط. قد تختلف النتائج الفعلية حسب المريض.">Les images sont des illustrations. Les résultats réels peuvent varier en fonction du patient.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cta-rdv" class="py-20 bg-f0f4f8">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-fr="Révélez l'éclat de votre regard." data-ar="اكشف عن إشراقة نظرتك.">Révélez l'éclat de votre regard.</h2>
+                <p class="text-lg text-gray-600 mt-3 mb-8 max-w-2xl mx-auto" data-fr="Découvrez les solutions personnalisées pour rajeunir votre apparence et retrouver un regard frais et reposé." data-ar="اكتشف الحلول المخصصة لتجديد مظهرك واستعادة نظرة منتعشة ومريحة.">Découvrez les solutions personnalisées pour rajeunir votre apparence et retrouver un regard frais et reposé.</p>
+                <a href="rdv.html" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg inline-block" data-fr="Demander une consultation" data-ar="طلب استشارة">Demander une consultation</a>
+             </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p data-fr="© 2025 Dr. Saada Ophtalmologue. Tous droits réservés." data-ar="© 2025 الدكتور سعادة أخصائي العيون. جميع الحقوق محفوظة.">© 2025 Dr. Saada Ophtalmologue. Tous droits réservés.</p>
+            <p class="text-sm mt-2" data-fr="Une vision claire pour un avenir radieux." data-ar="رؤية واضحة لمستقبل مشرق.">Une vision claire pour un avenir radieux.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
+            
+            const handleHeaderStyle = () => {
+                header.classList.add('header-scrolled');
+                if (navLinks) {
+                    navLinks.classList.remove('text-white');
+                    navLinks.classList.add('text-gray-700');
+                }
+                if (mobileMenuButtonIcon) {
+                    mobileMenuButtonIcon.classList.add('text-gray-700');
+                }
+            };
+            
+            const langFrBtn = document.getElementById('lang-fr-btn');
+            const langArBtn = document.getElementById('lang-ar-btn');
+            const body = document.body;
+
+            function setLanguage(lang) {
+                body.classList.remove('lang-fr', 'lang-ar');
+                body.classList.add(`lang-${lang}`);
+                if (lang === 'ar') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
+                }
+
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
+
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                    const translation = element.getAttribute(`data-${lang}`);
+                    if (translation) {
+                       element.innerHTML = translation;
+                    }
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            setLanguage(savedLang);
+
+            langFrBtn.addEventListener('click', () => {
+                setLanguage('fr');
+                localStorage.setItem('preferredLang', 'fr');
+            });
+
+            langArBtn.addEventListener('click', () => {
+                setLanguage('ar');
+                localStorage.setItem('preferredLang', 'ar');
+            });
+
+            handleHeaderStyle();
+        });
+    </script>
+</body>
+</html>
