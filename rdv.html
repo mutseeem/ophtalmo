@@ -197,7 +197,7 @@
                     </div>
 
                     <div class="input-wrapper">
-                        <input type="date" required class="form-input" data-fr-placeholder="Date de naissance *" data-ar-placeholder="تاريخ الميلاد *">
+                        <input type="text" id="birthdate-input" required class="form-input" data-fr-placeholder="Date de naissance *" data-ar-placeholder="تاريخ الميلاد *">
                         <i class="input-icon fas fa-calendar-alt"></i>
                     </div>
 
@@ -301,6 +301,23 @@
                     motifSelect.value = service;
                 }
             }
+
+            // --- SCRIPT ADDITION FOR DATE INPUT ---
+            // This makes the placeholder visible on the date field
+            const birthdateInput = document.getElementById('birthdate-input');
+
+            birthdateInput.addEventListener('focus', () => {
+                birthdateInput.type = 'date';
+                // Move the cursor to the end to avoid selecting the placeholder text
+                birthdateInput.selectionStart = birthdateInput.selectionEnd = birthdateInput.value.length;
+            });
+
+            birthdateInput.addEventListener('blur', () => {
+                if (!birthdateInput.value) {
+                    birthdateInput.type = 'text';
+                }
+            });
+            // --- END OF SCRIPT ADDITION ---
             
             // CORRECTED TOAST SCRIPT
             const rdvForm = document.getElementById('rdv-form');
@@ -318,6 +335,8 @@
                     }, 4000);
 
                     rdvForm.reset();
+                    // Reset the birthdate input back to text type to show placeholder
+                    birthdateInput.type = 'text';
                     // Reset the motif selector to the placeholder
                     document.getElementById('motif-select').value = "";
                 } else {
