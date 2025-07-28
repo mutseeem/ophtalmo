@@ -40,7 +40,7 @@
             z-index: -1;
         }
         
-        /* --- MODIFIED HEADER --- */
+        /* --- HEADER STYLES --- */
         .glass-header {
             position: fixed;
             width: 100%;
@@ -51,7 +51,10 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+        }
+
+        #mobile-menu-button {
+            color: white;
         }
 
         .lang-switcher {
@@ -73,22 +76,17 @@
             border-color: white;
             transform: scale(1.05);
         }
-        .lang-switcher button:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
         
-        /* --- MAIN LAYOUT --- */
+        /* --- MAIN LAYOUT & FORM --- */
         .main-container {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             width: 100%;
-            padding: 100px 1rem 2rem 1rem; /* 100px top padding is CRUCIAL */
+            padding: 120px 1rem 2rem 1rem; /* Adjust top padding for fixed header */
         }
         
-        /* --- FLOATING FORM CARD --- */
         .form-card {
             width: 100%;
             max-width: 600px;
@@ -98,18 +96,11 @@
             overflow: hidden; 
             animation: scale-up-fade-in 0.7s ease-out forwards;
         }
-        .form-card-header {
-            padding: 2rem 2.5rem;
-        }
-        .form-card-accent {
-            height: 6px;
-            background: linear-gradient(45deg, #005c97, #363795);
-        }
-        .form-card-body {
-            padding: 0.5rem 2.5rem 2.5rem 2.5rem;
-        }
+        .form-card-header { padding: 2rem 2.5rem; }
+        .form-card-accent { height: 6px; background: linear-gradient(45deg, #005c97, #363795); }
+        .form-card-body { padding: 0.5rem 2.5rem 2.5rem 2.5rem; }
 
-        /* Polished Form Inputs */
+        /* Form Inputs */
         .input-wrapper { position: relative; }
         .input-icon {
             position: absolute;
@@ -117,7 +108,6 @@
             left: 1rem;
             transform: translateY(-50%);
             color: #9ca3af;
-            transition: color 0.3s ease;
         }
         body.lang-ar .input-icon { left: auto; right: 1rem; }
         .form-input {
@@ -127,27 +117,12 @@
             border: 1px solid #d1d5db;
             border-radius: 0.5rem;
             padding: 0.9rem 1rem 0.9rem 3rem; 
-            transition: all 0.3s ease;
         }
         body.lang-ar .form-input { padding: 0.9rem 3rem 0.9rem 1rem; }
-        .form-input:focus {
-            outline: none;
-            border-color: #363795;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(54, 55, 149, 0.2);
-        }
-        .form-input:focus + .input-icon { color: #363795; }
-        input[type="date"]:not(:valid)::before { content: attr(placeholder); color: #6b7280; }
         
-        /* Polished Submit Button */
+        /* Submit Button */
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 92, 151, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(54, 55, 149, 0.4);
         }
 
         /* Animation */
@@ -180,14 +155,24 @@
                 <a href="contact.html" class="hover:text-white transition-colors duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
             </div>
 
-            <div class="flex items-center">
+            <div class="flex items-center gap-4">
                 <div class="lang-switcher">
                     <button id="lang-fr-btn">FR</button>
                     <button id="lang-ar-btn">AR</button>
                 </div>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none z-50">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
     </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-gray-800 bg-opacity-95 z-40 flex flex-col items-center justify-center text-white text-2xl space-y-8">
+        <a href="index.html#accueil" class="hover:text-blue-300" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+        <a href="index.html#a-propos" class="hover:text-blue-300" data-fr="Le Docteur" data-ar="الدكتور">Le Docteur</a>
+        <a href="index.html#services" class="hover:text-blue-300" data-fr="Services" data-ar="الخدمات">Services</a>
+        <a href="contact.html" class="hover:text-blue-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+    </div>
 
     <main class="main-container">
         
@@ -255,13 +240,25 @@
 
     </main>
 
-    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-full shadow-xl transition-all duration-500 transform translate-y-20 opacity-0 flex items-center gap-3">
-        <i class="fas fa-check-circle fa-lg"></i>
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-full shadow-xl opacity-0 translate-y-12 transition-all duration-500 ease-in-out flex items-center gap-3">
+        <i class="fas fa-check-circle"></i>
         <span data-fr="Demande envoyée avec succès !" data-ar="تم إرسال الطلب بنجاح!">Demande envoyée avec succès !</span>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuButton.querySelector('i');
+            
+            // Toggle Mobile Menu
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
+            });
+
+            // Language Switcher Logic
             const langFrBtn = document.getElementById('lang-fr-btn');
             const langArBtn = document.getElementById('lang-ar-btn');
             const body = document.body;
@@ -273,68 +270,58 @@
 
                 langFrBtn.classList.toggle('active', lang === 'fr');
                 langArBtn.classList.toggle('active', lang === 'ar');
-
+                
                 document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
                     const translation = element.getAttribute(`data-${lang}`);
-                    if (translation !== null) {
-                         if (element.tagName === 'BUTTON' && element.querySelector('span')) {
-                            const span = element.querySelector('span');
-                            if (span) {
-                                span.innerHTML = translation;
-                            }
-                        } else {
-                            element.innerHTML = translation;
-                        }
+                    const mainElement = element.querySelector('span') || element;
+                    if(mainElement.getAttribute(`data-${lang}`)) {
+                        mainElement.innerHTML = mainElement.getAttribute(`data-${lang}`);
+                    } else if (translation) {
+                        mainElement.innerHTML = translation;
                     }
                 });
                 
                 document.querySelectorAll('[data-fr-placeholder], [data-ar-placeholder]').forEach(element => {
-                    const placeholder = element.getAttribute(`data-${lang}-placeholder`);
-                    if (placeholder) {
-                        element.setAttribute('placeholder', placeholder);
-                    }
+                    element.setAttribute('placeholder', element.getAttribute(`data-${lang}-placeholder`));
                 });
             }
 
             const savedLang = localStorage.getItem('preferredLang') || 'fr';
             setLanguage(savedLang);
 
-            langFrBtn.addEventListener('click', () => {
-                if (!langFrBtn.classList.contains('active')) {
-                   setLanguage('fr');
-                   localStorage.setItem('preferredLang', 'fr');
-                }
-            });
+            langFrBtn.addEventListener('click', () => { setLanguage('fr'); localStorage.setItem('preferredLang', 'fr'); });
+            langArBtn.addEventListener('click', () => { setLanguage('ar'); localStorage.setItem('preferredLang', 'ar'); });
 
-            langArBtn.addEventListener('click', () => {
-                if (!langArBtn.classList.contains('active')) {
-                    setLanguage('ar');
-                    localStorage.setItem('preferredLang', 'ar');
-                }
-            });
-            
             // Pre-select service based on URL parameter
             const urlParams = new URLSearchParams(window.location.search);
             const service = urlParams.get('service');
-            
             if (service) {
                 const motifSelect = document.getElementById('motif-select');
-                if (motifSelect && motifSelect.querySelector('option[value="' + service + '"]')) {
+                if (motifSelect && motifSelect.querySelector(`option[value="${service}"]`)) {
                     motifSelect.value = service;
                 }
             }
-
+            
+            // CORRECTED TOAST SCRIPT
             const rdvForm = document.getElementById('rdv-form');
             const toast = document.getElementById('toast');
+            
             rdvForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                if(rdvForm.checkValidity()){
-                    toast.classList.remove('translate-y-20', 'opacity-0');
+                if (rdvForm.checkValidity()) {
+                    // Show the toast
+                    toast.classList.remove('opacity-0', 'translate-y-12');
+
+                    // Hide the toast after 4 seconds
                     setTimeout(() => {
-                        toast.classList.add('translate-y-20', 'opacity-0');
+                        toast.classList.add('opacity-0', 'translate-y-12');
                     }, 4000);
+
                     rdvForm.reset();
+                    // Reset the motif selector to the placeholder
+                    document.getElementById('motif-select').value = "";
                 } else {
+                    // Let the browser handle showing validation errors
                     rdvForm.reportValidity();
                 }
             });
