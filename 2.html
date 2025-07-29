@@ -20,7 +20,6 @@
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
-        /* Arabic Font specific */
         body.lang-ar {
             font-family: 'Tajawal', sans-serif;
         }
@@ -28,7 +27,6 @@
             font-family: 'Tajawal', sans-serif;
         }
         
-        /* Header Styling */
         #main-header {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -41,7 +39,6 @@
             padding-bottom: 0.5rem;
         }
         
-        /* Button Styling */
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
@@ -53,7 +50,6 @@
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
 
-        /* Language Switcher Button */
         .lang-switcher button {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -79,6 +75,16 @@
             color: white;
             border-color: #005c97;
         }
+        
+#logo-img {
+    transform: scale(2.4);
+    transform-origin: left center; 
+    transition: transform 0.3s ease; 
+}
+
+body.lang-ar #logo-img {
+    transform-origin: right center; 
+}
     </style>
 </head>
 <body class="text-gray-700">
@@ -184,10 +190,8 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuButtonIcon = document.querySelector('#mobile-menu-button i');
             
-            // Function to handle header style
             const handleHeaderStyle = () => {
                 const isScrolled = window.scrollY > 50;
-                // For subpages, we treat it as always scrolled
                 header.classList.add('header-scrolled');
                 if (navLinks) {
                     navLinks.classList.remove('text-white');
@@ -198,13 +202,11 @@
                 }
             };
             
-            // --- Language Switcher Logic ---
             const langFrBtn = document.getElementById('lang-fr-btn');
             const langArBtn = document.getElementById('lang-ar-btn');
             const body = document.body;
 
             function setLanguage(lang) {
-                // Update body class for font and RTL direction
                 body.classList.remove('lang-fr', 'lang-ar');
                 body.classList.add(`lang-${lang}`);
                 if (lang === 'ar') {
@@ -213,11 +215,9 @@
                     body.setAttribute('dir', 'ltr');
                 }
 
-                // Update active button state
                 langFrBtn.classList.toggle('active', lang === 'fr');
                 langArBtn.classList.toggle('active', lang === 'ar');
 
-                // Translate all elements with data-fr and data-ar attributes
                 document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
                     const translation = element.getAttribute(`data-${lang}`);
                     if (translation) {
@@ -226,12 +226,10 @@
                 });
             }
 
-            // Mobile Menu Toggle
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
             
-            // --- Initial Setup ---
             const savedLang = localStorage.getItem('preferredLang') || 'fr';
             setLanguage(savedLang);
 
@@ -245,7 +243,6 @@
                 localStorage.setItem('preferredLang', 'ar');
             });
 
-            // Set initial header style on page load
             handleHeaderStyle();
         });
     </script>

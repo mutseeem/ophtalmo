@@ -31,7 +31,6 @@
         .hidden {
             display: none;
         }
-        /* Header styles */
         #main-header {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -43,7 +42,6 @@
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
-        /* Button styles */
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
@@ -53,7 +51,6 @@
             transform: translateY(-3px);
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
-        /* Language switcher button styles */
         .lang-switch-btn {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid #fff;
@@ -101,7 +98,6 @@
             display: none;
         }
         
-        /* Header Styling */
         #main-header {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -114,17 +110,15 @@
             padding-bottom: 0.5rem;
         }
 
-        /* RTL Overlap Fix - This is the new, crucial part */
         body.rtl #nav-links > :not([hidden]) ~ :not([hidden]) {
-            margin-left: 0; /* Remove default LTR spacing */
-            margin-right: 2rem; /* Apply correct RTL spacing (8 * 0.25rem) */
+            margin-left: 0; 
+            margin-right: 2rem; 
         }
         body.rtl #header-buttons-container > :not([hidden]) ~ :not([hidden]) {
-            margin-left: 0; /* Remove default LTR spacing */
-            margin-right: 1rem; /* Apply correct RTL spacing (4 * 0.25rem) */
+            margin-left: 0; 
+            margin-right: 1rem; 
         }
         
-        /* Button Styling */
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
@@ -135,7 +129,6 @@
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
 
-        /* Language Switcher Button */
         .lang-switch-btn {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid #fff;
@@ -157,6 +150,16 @@
             background-color: #363795;
             color: #fff;
         }
+#logo-img {
+    transform: scale(2.4);
+    transform-origin: left center; 
+    transition: transform 0.3s ease; 
+}
+
+
+body.lang-ar #logo-img {
+    transform-origin: right center; 
+}
     </style>
 </head>
 <body class="text-gray-700">
@@ -288,7 +291,6 @@
             const langSwitcher = document.getElementById('lang-switcher');
             const htmlEl = document.documentElement;
 
-            // Function to handle header style on scroll
             const handleScroll = () => {
                 if (window.scrollY > 50) {
                     header.classList.add('header-scrolled');
@@ -297,7 +299,6 @@
                     mobileMenuButtonIcon.classList.remove('text-white');
                     mobileMenuButtonIcon.classList.add('text-gray-700');
                 } else {
-                    // This part is mainly for the homepage, but good to have for consistency
                     header.classList.remove('header-scrolled');
                     navLinks.classList.add('text-white');
                     navLinks.classList.remove('text-gray-700');
@@ -306,18 +307,16 @@
                 }
             };
             
-            // Set initial header state on page load
-            // Since this is a subpage, we force the scrolled state from the start
+          
             header.classList.add('header-scrolled');
             navLinks.classList.remove('text-white');
             navLinks.classList.add('text-gray-700');
             mobileMenuButtonIcon.classList.remove('text-white');
             mobileMenuButtonIcon.classList.add('text-gray-700');
             
-            // Add scroll listener
             window.addEventListener('scroll', handleScroll);
 
-            // --- Language Switcher Logic ---
+            
             const setLanguage = (lang) => {
                 htmlEl.setAttribute('lang', lang);
                 document.body.classList.toggle('rtl', lang === 'ar');
@@ -341,7 +340,6 @@
             const initialLang = localStorage.getItem('language') || 'fr';
             setLanguage(initialLang);
 
-            // --- Mobile Menu Toggle ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {

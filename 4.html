@@ -20,7 +20,7 @@
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
-        /* Arabic Font specific */
+       
         body.lang-ar {
             font-family: 'Tajawal', sans-serif;
         }
@@ -28,7 +28,7 @@
             font-family: 'Tajawal', sans-serif;
         }
         
-        /* Header Styling */
+       
         #main-header {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -41,7 +41,7 @@
             padding-bottom: 0.5rem;
         }
         
-        /* Button Styling */
+        
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
@@ -53,7 +53,6 @@
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
 
-        /* Language Switcher Button */
         .lang-switcher button {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -79,6 +78,17 @@
             color: white;
             border-color: #005c97;
         }
+        
+#logo-img {
+    transform: scale(2.4);
+    transform-origin: left center;
+    transition: transform 0.3s ease; 
+}
+
+
+body.lang-ar #logo-img {
+    transform-origin: right center; 
+}
     </style>
 </head>
 <body class="text-gray-700">

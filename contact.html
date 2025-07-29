@@ -22,23 +22,17 @@
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
         }
-        /* Arabic Font specific */
         body.lang-ar {
             font-family: 'Cairo', sans-serif;
         }
         body.lang-ar h1, body.lang-ar h2, body.lang-ar h3 {
             font-family: 'Cairo', sans-serif;
         }
-        /* Hero Section for other pages */
         .page-hero-section {
             background-image: linear-gradient(rgba(0, 20, 40, 0.6), rgba(0, 20, 40, 0.6)), url('src/3.jpg');
             background-size: cover;
             background-position: center;
-            /*
-             * CRITICAL FIX FOR iOS: Changed 'fixed' to 'scroll'.
-             * The 'fixed' value for this property is known to cause rendering and performance bugs on mobile browsers like Safari.
-             * 'scroll' is the universally compatible option.
-            */
+          
             background-attachment: scroll;
             padding-top: 10rem;
             padding-bottom: 5rem;
@@ -46,22 +40,19 @@
             text-align: center;
         }
 
-        /* Custom gradient text from logo colors */
         .gradient-text {
             background: linear-gradient(45deg, #60a5fa, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Sticky Header Style on Scroll */
         .header-scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Added for better Safari compatibility */
+            -webkit-backdrop-filter: blur(10px); 
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
-        /* Scroll-triggered Animations */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -71,7 +62,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Custom button style */
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
@@ -83,7 +73,6 @@
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
         
-        /* Language Switcher Button */
         .lang-switcher button {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -121,16 +110,15 @@
         .lang-switcher {
             gap: 0.5rem; 
         }
-        /* MODIFICATION: Makes the logo larger without changing header height */
 #logo-img {
     transform: scale(2.4);
-    transform-origin: left center; /* Default for LTR languages like French */
-    transition: transform 0.3s ease; /* Optional: adds a smooth transition */
+    transform-origin: left center; 
+    transition: transform 0.3s ease; 
 }
 
-/* FIX for Arabic (RTL) version */
+
 body.lang-ar #logo-img {
-    transform-origin: right center; /* Overrides the origin for RTL layout */
+    transform-origin: right center; 
 }
 
     </style>
@@ -276,14 +264,12 @@ body.lang-ar #logo-img {
                 }
             });
 
-            // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
 
-            // Scroll Animations
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -298,7 +284,6 @@ body.lang-ar #logo-img {
                 observer.observe(el);
             });
 
-            // Language Switcher Logic
             const langFrBtn = document.getElementById('lang-fr-btn');
             const langArBtn = document.getElementById('lang-ar-btn');
             const body = document.body;
@@ -314,9 +299,6 @@ body.lang-ar #logo-img {
                 document.querySelectorAll('[data-fr][data-ar]').forEach(element => {
                     const translation = element.getAttribute(`data-${lang}`);
                     if (translation) {
-                        // Check for specific tags that should not have their inner HTML changed,
-                        // for instance, if they contain other elements.
-                        // For this simple case, innerHTML is fine.
                         element.innerHTML = translation;
                     }
                 });

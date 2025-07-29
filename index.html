@@ -22,40 +22,36 @@
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
         }
-        /* Arabic Font specific */
+        
         body.lang-ar {
             font-family: 'Cairo', sans-serif;
         }
         body.lang-ar h1, body.lang-ar h2, body.lang-ar h3 {
-            font-family: 'Cairo', sans-serif; /* Use Cairo for headings in Arabic as well */
+            font-family: 'Cairo', sans-serif; 
         }
-        /* Hero Section with background image */
+       
         .hero-section {
             background-image: linear-gradient(rgba(0, 20, 40, 0.6), rgba(0, 20, 40, 0.6)), url('src/3.jpg');
             background-size: cover;
             background-position: center;
-            /* * CRITICAL FIX: Changed 'fixed' to 'scroll'.
-             * 'background-attachment: fixed' is known to cause major performance and rendering issues on mobile browsers, especially iOS Safari.
-             * 'scroll' is the default behavior and is compatible everywhere.
-            */
             background-attachment: scroll;
         }
-        /* Custom gradient text from logo colors */
+        
         .gradient-text {
             background: linear-gradient(45deg, #60a5fa, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Sticky Header Style on Scroll */
+        
         .header-scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+            -webkit-backdrop-filter: blur(10px); 
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
-        /* Scroll-triggered Animations */
+       
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -65,18 +61,18 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Custom button style */
+        
         .btn-primary {
             background: linear-gradient(45deg, #005c97, #363795);
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 92, 151, 0.4);
-            white-space: nowrap; /* Ensure text doesn't wrap in button */
+            white-space: nowrap; 
         }
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 7px 20px rgba(54, 55, 149, 0.5);
         }
-        /* About section image styling */
+     
         .about-image-container {
             position: relative;
             box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
@@ -97,18 +93,18 @@
             top: 0;
             left: 0;
         }
-        /* Style for date input placeholder */
+       
         input[type="date"]::before {
             content: attr(placeholder);
             position: absolute;
-            color: #9ca3af; /* gray-400 */
+            color: #9ca3af; 
         }
         input[type="date"]:focus::before,
         input[type="date"]:valid::before {
             display: none;
         }
 
-        /* Language Switcher Button */
+        
         .lang-switcher button {
             background-color: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -117,7 +113,7 @@
             border-radius: 20px;
             font-weight: bold;
             transition: background-color 0.3s ease, border-color 0.3s ease;
-            white-space: nowrap; /* Prevent text wrapping inside buttons */
+            white-space: nowrap; 
         }
         .lang-switcher button.active {
             background-color: white;
@@ -143,29 +139,25 @@
             border-color: rgba(0, 0, 0, 0.2);
         }
 
-        /* Fix for language switcher buttons spacing */
         .lang-switcher {
-            gap: 0.5rem; /* Use gap for consistent spacing in flex container */
+            gap: 0.5rem; 
         }
 
-        /* NEW: Ensure mobile menu button is visible on scrolled header */
         .header-scrolled #mobile-menu-button {
-            color: #333; /* Darker color for visibility on light background */
+            color: #333; 
         }
         .header-scrolled #mobile-menu-button i {
-            color: #333; /* Explicitly target the icon */
+            color: #333; 
         }
 
-        /* MODIFICATION: Makes the logo larger without changing header height */
         #logo-img {
             transform: scale(2.4);
-            transform-origin: left center; /* Default for LTR languages like French */
-            transition: transform 0.3s ease; /* Optional: adds a smooth transition */
+            transform-origin: left center; 
+            transition: transform 0.3s ease; 
         }
         
-        /* FIX for Arabic (RTL) version */
         body.lang-ar #logo-img {
-            transform-origin: right center; /* Overrides the origin for RTL layout */
+            transform-origin: right center; 
         }
     </style>
 </head>
