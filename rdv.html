@@ -162,6 +162,17 @@
         }
         /* --- END: FIX FOR iOS SELECT OVERLAP --- */
 
+        /* MODIFICATION: Makes the logo larger without changing header height */
+        #logo-img {
+            transform: scale(2.4);
+            transform-origin: left center; /* Default for LTR languages like French */
+            transition: transform 0.3s ease; /* Optional: adds a smooth transition */
+        }
+
+        /* FIX for Arabic (RTL) version */
+        body.lang-ar #logo-img {
+            transform-origin: right center; /* Overrides the origin for RTL layout */
+        }
     </style>
 </head>
 <body class="lang-fr">
@@ -171,7 +182,7 @@
     <header class="glass-header">
         <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <a href="index.html" class="opacity-90 hover:opacity-100 transition-opacity">
-                <img src="src/6.jpg" alt="Logo Dr. Saada" class="h-10 rounded-md">
+                <img src="src/6.jpg" alt="Logo Dr. Saada" id="logo-img" class="h-12 md:h-14">
             </a>
 
             <div class="hidden md:flex items-center gap-6 text-gray-200 font-semibold">

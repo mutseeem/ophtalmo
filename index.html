@@ -155,6 +155,18 @@
         .header-scrolled #mobile-menu-button i {
             color: #333; /* Explicitly target the icon */
         }
+
+        /* MODIFICATION: Makes the logo larger without changing header height */
+        #logo-img {
+            transform: scale(2.4);
+            transform-origin: left center; /* Default for LTR languages like French */
+            transition: transform 0.3s ease; /* Optional: adds a smooth transition */
+        }
+        
+        /* FIX for Arabic (RTL) version */
+        body.lang-ar #logo-img {
+            transform-origin: right center; /* Overrides the origin for RTL layout */
+        }
     </style>
 </head>
 <body class="text-gray-700 lang-fr">
