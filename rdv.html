@@ -49,7 +49,7 @@
             z-index: 50;
             background-color: rgba(12, 26, 46, 0.4);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); /* For Safari compatibility */
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -108,7 +108,7 @@
             left: 1rem;
             transform: translateY(-50%);
             color: #9ca3af;
-            pointer-events: none; /* Make icon non-interactive */
+            pointer-events: none;
         }
         body.lang-ar .input-icon { left: auto; right: 1rem; }
         .form-input {
@@ -137,6 +137,31 @@
                 transform: scale(1) translateY(0);
             }
         }
+
+        /* --- START: FIX FOR iOS SELECT OVERLAP --- */
+        /* This removes native dropdown styling, allowing padding to work correctly on iPhones. */
+        select.form-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Add a custom dropdown arrow since appearance:none removes the default one. */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            /* Adjust right padding to make space for our new custom arrow */
+            padding-right: 3rem;
+        }
+
+        /* Adjust the arrow position for the Arabic (RTL) version */
+        body.lang-ar select.form-input {
+            background-position: left 0.5rem center;
+            padding-left: 3rem;
+            /* The padding for the icon on the right is already handled by the general .form-input[dir=rtl] rule */
+            padding-right: 3rem;
+        }
+        /* --- END: FIX FOR iOS SELECT OVERLAP --- */
+
     </style>
 </head>
 <body class="lang-fr">
@@ -188,27 +213,26 @@
                 <form id="rdv-form" novalidate class="space-y-5">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="input-wrapper">
-                            <i class="input-icon fas fa-user"></i>
                             <input type="text" required class="form-input" data-fr-placeholder="Nom complet *" data-ar-placeholder="الاسم الكامل *">
+                            <i class="input-icon fas fa-user"></i>
                         </div>
                         <div class="input-wrapper">
-                             <i class="input-icon fas fa-phone"></i>
                             <input type="tel" required class="form-input" data-fr-placeholder="N° de téléphone *" data-ar-placeholder="رقم الهاتف *">
+                            <i class="input-icon fas fa-phone"></i>
                         </div>
                     </div>
 
                     <div class="input-wrapper">
-                        <i class="input-icon fas fa-calendar-alt"></i>
                         <input type="text" id="birthdate-input" required class="form-input" data-fr-placeholder="Date de naissance *" data-ar-placeholder="تاريخ الميلاد *">
+                        <i class="input-icon fas fa-calendar-alt"></i>
                     </div>
 
                     <div class="input-wrapper">
-                        <i class="input-icon fas fa-envelope"></i>
                         <input type="email" class="form-input" data-fr-placeholder="Adresse e-mail (facultatif)" data-ar-placeholder="البريد الإلكتروني (اختياري)">
+                        <i class="input-icon fas fa-envelope"></i>
                     </div>
                     
                     <div class="input-wrapper">
-                        <i class="input-icon fas fa-eye"></i>
                         <select required class="form-input" id="motif-select">
                             <option value="" disabled selected data-fr="Sélectionner un motif de visite..." data-ar="اختر سبب الزيارة...">Sélectionner un motif de visite...</option>
                             <option value="refractive" data-fr="Chirurgie Réfractive" data-ar="جراحة تصحيح النظر">Chirurgie Réfractive</option>
@@ -223,6 +247,7 @@
                             <option value="lentilles" data-fr="Lentilles de contact" data-ar="العدسات اللاصقة">Lentilles de contact</option>
                             <option value="keratocone" data-fr="Suivi du kératocône" data-ar="متابعة القرنية المخروطية">Suivi du kératocône</option>
                         </select>
+                        <i class="input-icon fas fa-eye"></i>
                     </div>
 
                     <div>
@@ -250,18 +275,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuButton.querySelector('i');
             
-            if (mobileMenuButton && mobileMenu) {
-                const menuIcon = mobileMenuButton.querySelector('i');
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    if (menuIcon) {
-                        menuIcon.classList.toggle('fa-bars');
-                        menuIcon.classList.toggle('fa-times');
-                    }
-                });
-            }
+            // Toggle Mobile Menu
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
+            });
 
+            // Language Switcher Logic
             const langFrBtn = document.getElementById('lang-fr-btn');
             const langArBtn = document.getElementById('lang-ar-btn');
             const body = document.body;
@@ -271,77 +294,82 @@
                 body.classList.add(`lang-${lang}`);
                 body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
 
-                if (langFrBtn && langArBtn) {
-                    langFrBtn.classList.toggle('active', lang === 'fr');
-                    langArBtn.classList.toggle('active', lang === 'ar');
-                }
+                langFrBtn.classList.toggle('active', lang === 'fr');
+                langArBtn.classList.toggle('active', lang === 'ar');
                 
-                document.querySelectorAll('[data-fr-placeholder], [data-ar-placeholder]').forEach(element => {
-                    element.setAttribute('placeholder', element.getAttribute(`data-${lang}-placeholder`));
-                });
-
-                document.querySelectorAll('[data-fr][data-ar]').forEach(element => {
+                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
                     const translation = element.getAttribute(`data-${lang}`);
                     const mainElement = element.querySelector('span') || element;
-                    if(mainElement && mainElement.getAttribute(`data-${lang}`)) {
+                    if(mainElement.getAttribute(`data-${lang}`)) {
                         mainElement.innerHTML = mainElement.getAttribute(`data-${lang}`);
                     } else if (translation) {
                         mainElement.innerHTML = translation;
                     }
+                });
+                
+                document.querySelectorAll('[data-fr-placeholder], [data-ar-placeholder]').forEach(element => {
+                    element.setAttribute('placeholder', element.getAttribute(`data-${lang}-placeholder`));
                 });
             }
 
             const savedLang = localStorage.getItem('preferredLang') || 'fr';
             setLanguage(savedLang);
 
-            if (langFrBtn && langArBtn) {
-                langFrBtn.addEventListener('click', () => { setLanguage('fr'); localStorage.setItem('preferredLang', 'fr'); });
-                langArBtn.addEventListener('click', () => { setLanguage('ar'); localStorage.setItem('preferredLang', 'ar'); });
-            }
+            langFrBtn.addEventListener('click', () => { setLanguage('fr'); localStorage.setItem('preferredLang', 'fr'); });
+            langArBtn.addEventListener('click', () => { setLanguage('ar'); localStorage.setItem('preferredLang', 'ar'); });
 
+            // Pre-select service based on URL parameter
             const urlParams = new URLSearchParams(window.location.search);
             const service = urlParams.get('service');
-            const motifSelect = document.getElementById('motif-select');
-            if (service && motifSelect && motifSelect.querySelector(`option[value="${service}"]`)) {
-                motifSelect.value = service;
+            if (service) {
+                const motifSelect = document.getElementById('motif-select');
+                if (motifSelect && motifSelect.querySelector(`option[value="${service}"]`)) {
+                    motifSelect.value = service;
+                }
             }
-            
-            const birthdateInput = document.getElementById('birthdate-input');
-            if (birthdateInput) {
-                birthdateInput.addEventListener('focus', () => {
-                    birthdateInput.type = 'date';
-                });
 
-                birthdateInput.addEventListener('blur', () => {
-                    if (!birthdateInput.value) {
-                        birthdateInput.type = 'text';
-                    }
-                });
-            }
+            // --- SCRIPT ADDITION FOR DATE INPUT ---
+            // This makes the placeholder visible on the date field
+            const birthdateInput = document.getElementById('birthdate-input');
+
+            birthdateInput.addEventListener('focus', () => {
+                birthdateInput.type = 'date';
+                // Move the cursor to the end to avoid selecting the placeholder text
+                birthdateInput.selectionStart = birthdateInput.selectionEnd = birthdateInput.value.length;
+            });
+
+            birthdateInput.addEventListener('blur', () => {
+                if (!birthdateInput.value) {
+                    birthdateInput.type = 'text';
+                }
+            });
+            // --- END OF SCRIPT ADDITION ---
             
+            // CORRECTED TOAST SCRIPT
             const rdvForm = document.getElementById('rdv-form');
             const toast = document.getElementById('toast');
-            if (rdvForm && toast) {
-                rdvForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    if (rdvForm.checkValidity()) {
-                        toast.classList.remove('opacity-0', 'translate-y-12');
-                        setTimeout(() => {
-                            toast.classList.add('opacity-0', 'translate-y-12');
-                        }, 4000);
+            
+            rdvForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (rdvForm.checkValidity()) {
+                    // Show the toast
+                    toast.classList.remove('opacity-0', 'translate-y-12');
 
-                        rdvForm.reset();
-                        if (birthdateInput) {
-                            birthdateInput.type = 'text';
-                        }
-                        if (motifSelect) {
-                            motifSelect.value = "";
-                        }
-                    } else {
-                        rdvForm.reportValidity();
-                    }
-                });
-            }
+                    // Hide the toast after 4 seconds
+                    setTimeout(() => {
+                        toast.classList.add('opacity-0', 'translate-y-12');
+                    }, 4000);
+
+                    rdvForm.reset();
+                    // Reset the birthdate input back to text type to show placeholder
+                    birthdateInput.type = 'text';
+                    // Reset the motif selector to the placeholder
+                    document.getElementById('motif-select').value = "";
+                } else {
+                    // Let the browser handle showing validation errors
+                    rdvForm.reportValidity();
+                }
+            });
         });
     </script>
 </body>
