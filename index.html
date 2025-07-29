@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -29,12 +29,16 @@
         body.lang-ar h1, body.lang-ar h2, body.lang-ar h3 {
             font-family: 'Cairo', sans-serif; /* Use Cairo for headings in Arabic as well */
         }
-        /* Hero Section with background image from src/3.jpg */
+        /* Hero Section with background image */
         .hero-section {
             background-image: linear-gradient(rgba(0, 20, 40, 0.6), rgba(0, 20, 40, 0.6)), url('src/3.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax effect */
+            /* * CRITICAL FIX: Changed 'fixed' to 'scroll'.
+             * 'background-attachment: fixed' is known to cause major performance and rendering issues on mobile browsers, especially iOS Safari.
+             * 'scroll' is the default behavior and is compatible everywhere.
+            */
+            background-attachment: scroll;
         }
         /* Custom gradient text from logo colors */
         .gradient-text {
@@ -46,6 +50,7 @@
         .header-scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
@@ -137,12 +142,12 @@
             background-color: rgba(0, 0, 0, 0.1);
             border-color: rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Fix for language switcher buttons spacing */
         .lang-switcher {
             gap: 0.5rem; /* Use gap for consistent spacing in flex container */
         }
-        
+
         /* NEW: Ensure mobile menu button is visible on scrolled header */
         .header-scrolled #mobile-menu-button {
             color: #333; /* Darker color for visibility on light background */
@@ -169,12 +174,12 @@
                 <a href="contact.html" class="hover:text-blue-300 transition duration-300" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
             </div>
 
-            <div class="flex items-center gap-4 md:gap-8"> 
+            <div class="flex items-center gap-4 md:gap-8">
                 <div class="lang-switcher flex">
                     <button id="lang-fr-btn" class="active">FR</button>
                     <button id="lang-ar-btn">AR</button>
                 </div>
-                
+
                 <a href="rdv.html" class="hidden md:block btn-primary text-white font-bold py-3 px-6 rounded-full" data-fr="Prendre RDV" data-ar="حجز موعد">
                     Prendre RDV
                 </a>
@@ -419,43 +424,50 @@
             const navLinks = document.getElementById('nav-links');
             const logo = document.getElementById('logo-img');
             
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('header-scrolled');
-                    if(navLinks) {
-                        navLinks.classList.remove('text-white');
-                        navLinks.classList.add('text-gray-700');
+            // Check if elements exist before adding event listeners
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('header-scrolled');
+                        if(navLinks) {
+                            navLinks.classList.remove('text-white');
+                            navLinks.classList.add('text-gray-700');
+                        }
+                    } else {
+                        header.classList.remove('header-scrolled');
+                        if(navLinks) {
+                            navLinks.classList.add('text-white');
+                            navLinks.classList.remove('text-gray-700');
+                        }
                     }
-                } else {
-                    header.classList.remove('header-scrolled');
-                    if(navLinks) {
-                        navLinks.classList.add('text-white');
-                        navLinks.classList.remove('text-gray-700');
-                    }
-                }
-            });
+                });
+            }
 
             // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
 
             // Scroll Animations
             const revealElements = document.querySelectorAll('.reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('reveal-visible');
-                        observer.unobserve(entry.target); // Unobserve after it becomes visible
-                    }
-                });
-            }, { threshold: 0.1 });
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('reveal-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
 
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
+                revealElements.forEach(el => {
+                    observer.observe(el);
+                });
+            }
 
             // Language Switcher Logic
             const langFrBtn = document.getElementById('lang-fr-btn');
@@ -463,46 +475,41 @@
             const body = document.body;
 
             function setLanguage(lang) {
-                // Update body class for font and potentially RTL
                 body.classList.remove('lang-fr', 'lang-ar');
                 body.classList.add(`lang-${lang}`);
-                if (lang === 'ar') {
-                    body.setAttribute('dir', 'rtl');
-                } else {
-                    body.setAttribute('dir', 'ltr');
+                body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+                if (langFrBtn && langArBtn) {
+                    langFrBtn.classList.toggle('active', lang === 'fr');
+                    langArBtn.classList.toggle('active', lang === 'ar');
                 }
 
-                // Update active button state
-                langFrBtn.classList.toggle('active', lang === 'fr');
-                langArBtn.classList.toggle('active', lang === 'ar');
-
-                // Translate all elements with data-fr and data-ar attributes
-                document.querySelectorAll('[data-fr], [data-ar]').forEach(element => {
+                document.querySelectorAll('[data-fr][data-ar]').forEach(element => {
                     const translation = element.getAttribute(`data-${lang}`);
-                    if (translation) { // Check if a translation exists for the current language
+                    if (translation) {
                         if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                             element.setAttribute('placeholder', translation);
                         } else {
-                            // Using innerHTML to correctly render <br> tags if they exist in the attribute
                             element.innerHTML = translation;
                         }
                     }
                 });
             }
-
-            // Initial language setting (from localStorage or default to French)
+            
             const savedLang = localStorage.getItem('preferredLang') || 'fr';
             setLanguage(savedLang);
 
-            langFrBtn.addEventListener('click', () => {
-                setLanguage('fr');
-                localStorage.setItem('preferredLang', 'fr');
-            });
+            if (langFrBtn && langArBtn) {
+                langFrBtn.addEventListener('click', () => {
+                    setLanguage('fr');
+                    localStorage.setItem('preferredLang', 'fr');
+                });
 
-            langArBtn.addEventListener('click', () => {
-                setLanguage('ar');
-                localStorage.setItem('preferredLang', 'ar');
-            });
+                langArBtn.addEventListener('click', () => {
+                    setLanguage('ar');
+                    localStorage.setItem('preferredLang', 'ar');
+                });
+            }
         });
     </script>
 </body>
